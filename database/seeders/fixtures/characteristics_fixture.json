@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Weapon skills",
+        "game_id": 1
+    },
+    {
+        "name": "Ballistic skills",
+        "game_id": 1
+    },
+    {
+        "name": "Strength",
+        "game_id": 1
+    },
+    {
+        "name": "Tough",
+        "game_id": 1
+    },
+    {
+        "name": "Agility",
+        "game_id": 1
+    },
+    {
+        "name": "Intelligence",
+        "game_id": 1
+    },
+    {
+        "name": "Perception",
+        "game_id": 1
+    },
+    {
+        "name": "Will power",
+        "game_id": 1
+    },
+    {
+        "name": "Fellow ships",
+        "game_id": 1
+    }
+]

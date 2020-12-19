@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Characteristic;
 use App\Models\Employee;
 use App\Models\Game;
 use App\Models\User;
@@ -47,12 +48,24 @@ class FixtureSeeder
         }
 
         $gameData = JsonUtils::decodeFile(PathUtils::join(__DIR__, 'fixtures', 'games_fixture.json'));
+        $gameIds = [];
         foreach ($gameData as $gameDatum)
         {
             $game = new Game();
             $game->name = $this->getValueFromDatum($gameDatum, 'name', function () { return $this->faker->sentence(2); });
             $game->description = $this->getValueFromDatum($gameDatum, 'description', function () { return $this->faker->text; });
             $game->save();
+            $gameIds[] = $game->id;
+        }
+
+        $characteristicData = JsonUtils::decodeFile(PathUtils::join(__DIR__, 'fixtures', 'characteristics_fixture.json'));
+        foreach ($characteristicData as $characteristicDatum)
+        {
+            $characteristic = new Characteristic();
+            $characteristic->name = $this->getValueFromDatum($characteristicDatum, 'name', function () { return $this->faker->text(10); });
+            $characteristic->description = $this->getValueFromDatum($characteristicDatum, 'description', function () { return $this->faker->text; });
+            $characteristic->game_id = $this->getValueFromDatum($characteristicDatum, 'description', function () use ($gameIds) { return $this->faker->randomElement($gameIds); });
+            $characteristic->save();
         }
     }
 }
