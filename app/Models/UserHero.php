@@ -26,8 +26,8 @@ class UserHero extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function characteristics() : BelongsToMany
+    public function characteristicValues() : BelongsToMany
     {
-        return $this->belongsToMany(Characteristic::class, 'user_heroes_characteristics', 'hero_id', null)->withPivotValue('value');
+        return $this->belongsToMany(Characteristic::class, 'user_heroes_characteristics', 'hero_id', null)->withPivot(['value'])->where('game_id', $this->game_id);
     }
 }
