@@ -1,0 +1,3 @@
+[submodule "nkf-php-module"]
+	path = nkf-php-module
+	url = https://github.com/kaktusv6/nkf-php-module.git
