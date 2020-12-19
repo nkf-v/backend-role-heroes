@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends Model
 {
+    use CrudTrait;
+
     public $timestamps = true;
     protected $fillable = [
         'name',
@@ -16,5 +19,10 @@ class Game extends Model
     public function heroes() : HasMany
     {
         return $this->hasMany(UserHero::class);
+    }
+
+    public function characteristics() : HasMany
+    {
+        return $this->hasMany(Characteristic::class);
     }
 }
