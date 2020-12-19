@@ -3,9 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Employee;
+use App\Models\Game;
 use App\Models\User;
 use Faker\Generator;
 use Illuminate\Support\Str;
+use Nkf\General\Utils\JsonUtils;
+use Nkf\General\Utils\PathUtils;
 
 class FixtureSeeder
 {
@@ -14,6 +17,11 @@ class FixtureSeeder
     public function __construct()
     {
         $this->faker = app(Generator::class);
+    }
+
+    protected function getValueFromDatum($data, $key, callable $getDefaultValue)
+    {
+        return (($data[$key] ?? null) === null) ? $getDefaultValue() : $data[$key];
     }
 
     public function run() : void
@@ -36,6 +44,15 @@ class FixtureSeeder
             $user->password = bcrypt('qweqwe');
             $user->save();
             $userIds[] = $user->id;
+        }
+
+        $gameData = JsonUtils::decodeFile(PathUtils::join(__DIR__, 'fixtures', 'games_fixture.json'));
+        foreach ($gameData as $gameDatum)
+        {
+            $game = new Game();
+            $game->name = $this->getValueFromDatum($gameDatum, 'name', function () { return $this->faker->sentence(2); });
+            $game->description = $this->getValueFromDatum($gameDatum, 'description', function () { return $this->faker->text; });
+            $game->save();
         }
     }
 }
