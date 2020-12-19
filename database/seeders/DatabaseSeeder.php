@@ -1,18 +1,30 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
+    protected function clearTables() : void
+    {
+        $tableNames = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
+        Schema::disableForeignKeyConstraints();
+        foreach ($tableNames as $name) {
+            if ($name !== 'migrations')
+                DB::table($name)->truncate();
+        }
+        Schema::enableForeignKeyConstraints();
+    }
+
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        if (!App::isProduction()) {
+            $this->clearTables();
+            app(FixtureSeeder::class)->run();
+        }
     }
 }
