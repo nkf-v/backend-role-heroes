@@ -27,10 +27,10 @@ class CreateCharacteristics extends Migration
 
         Schema::create('user_heroes_characteristics', function (Blueprint $table)
         {
+            $table->id();
             $table->unsignedBigInteger('hero_id');
             $table->unsignedBigInteger('characteristic_id');
             $table->integer('value');
-            $table->primary(['hero_id', 'characteristic_id']);
             $table->unique(['hero_id', 'characteristic_id', 'value']);
 
             $table->foreign('hero_id')->on('user_heroes')->references('id')->onDelete('cascade');
