@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use App\Formatters\CharacteristicValueFormatter;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Nkf\General\Utils\ArrayUtils;
 
 class UserHero extends Model
 {
-    public $timestamps = false;
+    use CrudTrait;
+
+    public $timestamps = true;
     protected $fillable = [
         'name',
         'note',
@@ -29,5 +34,10 @@ class UserHero extends Model
     public function characteristicValues() : BelongsToMany
     {
         return $this->belongsToMany(Characteristic::class, 'user_heroes_characteristics', 'hero_id', null)->withPivot(['value'])->where('game_id', $this->game_id);
+    }
+
+    public function getCharacteristicValuesAttribute() : array
+    {
+        return app(CharacteristicValueFormatter::class)->formatList($this->characteristicValues()->get());
     }
 }

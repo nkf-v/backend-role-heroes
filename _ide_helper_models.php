@@ -68,6 +68,8 @@ namespace App\Models{
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristics
+ * @property-read int|null $characteristics_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserHero[] $heroes
  * @property-read int|null $heroes_count
  * @method static \Illuminate\Database\Eloquent\Builder|Game newModelQuery()
@@ -114,11 +116,12 @@ namespace App\Models{
  * @property int $game_id
  * @property int $user_id
  * @property string|null $note
- * @property string|null $created_at
- * @property string|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristicValues
  * @property-read int|null $characteristic_values_count
  * @property-read \App\Models\Game $game
+ * @property-read array $characteristic_values
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserHero newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserHero newQuery()
