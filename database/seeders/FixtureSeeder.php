@@ -6,6 +6,7 @@ use App\Models\Characteristic;
 use App\Models\Employee;
 use App\Models\Game;
 use App\Models\User;
+use App\Models\UserHero;
 use Faker\Generator;
 use Illuminate\Support\Str;
 use Nkf\General\Utils\JsonUtils;
@@ -48,14 +49,14 @@ class FixtureSeeder
         }
 
         $gameData = JsonUtils::decodeFile(PathUtils::join(__DIR__, 'fixtures', 'games_fixture.json'));
-        $gameIds = [];
+        $games = [];
         foreach ($gameData as $gameDatum)
         {
             $game = new Game();
             $game->name = $this->getValueFromDatum($gameDatum, 'name', function () { return $this->faker->sentence(2); });
             $game->description = $this->getValueFromDatum($gameDatum, 'description', function () { return $this->faker->text; });
             $game->save();
-            $gameIds[] = $game->id;
+            $games[] = $game;
         }
 
         $characteristicData = JsonUtils::decodeFile(PathUtils::join(__DIR__, 'fixtures', 'characteristics_fixture.json'));
@@ -64,8 +65,24 @@ class FixtureSeeder
             $characteristic = new Characteristic();
             $characteristic->name = $this->getValueFromDatum($characteristicDatum, 'name', function () { return $this->faker->text(10); });
             $characteristic->description = $this->getValueFromDatum($characteristicDatum, 'description', function () { return $this->faker->text; });
-            $characteristic->game_id = $this->getValueFromDatum($characteristicDatum, 'description', function () use ($gameIds) { return $this->faker->randomElement($gameIds); });
+            $characteristic->game_id = $this->getValueFromDatum($characteristicDatum, 'description', function () use ($games) { return $this->faker->randomElement($games)->id; });
             $characteristic->save();
+        }
+
+        foreach ($userIds as $userId)
+        {
+            $hero = new UserHero();
+            $hero->user_id = $userId;
+            $hero->name = $this->faker->sentence(2);
+            $hero->note = $this->faker->boolean ? null : $this->faker->text;
+            $hero->game_id = $this->faker->randomElement($games)->id;
+            $hero->save();
+
+            /** @var Characteristic $characteristic */
+            foreach ($hero->game->characteristics as $characteristic)
+            {
+                $hero->characteristicValues()->attach($characteristic->id, ['value' => random_int(10, 100)]);
+            }
         }
     }
 }
