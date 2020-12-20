@@ -3,3 +3,4 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-question'></i> Users</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('game') }}'><i class='nav-icon la la-question'></i> Games</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('characteristic') }}'><i class='nav-icon la la-question'></i> Characteristics</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user_hero') }}'><i class='nav-icon la la-question'></i> Heroes</a></li>
