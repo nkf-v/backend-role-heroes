@@ -71,17 +71,17 @@ class FixtureSeeder
 
         foreach ($userIds as $userId)
         {
-            $hero = new UserHero();
-            $hero->user_id = $userId;
-            $hero->name = $this->faker->sentence(2);
-            $hero->note = $this->faker->boolean ? null : $this->faker->text;
-            $hero->game_id = $this->faker->randomElement($games)->id;
-            $hero->save();
+            for ($i = random_int(5, 10); $i --> 0;) {
+                $hero = new UserHero();
+                $hero->user_id = $userId;
+                $hero->name = $this->faker->sentence(2);
+                $hero->note = $this->faker->boolean ? null : $this->faker->text;
+                $hero->game_id = $this->faker->randomElement($games)->id;
+                $hero->save();
 
-            /** @var Characteristic $characteristic */
-            foreach ($hero->game->characteristics as $characteristic)
-            {
-                $hero->characteristicValues()->attach($characteristic->id, ['value' => random_int(10, 100)]);
+                /** @var Characteristic $characteristic */
+                foreach ($hero->game->characteristics as $characteristic)
+                    $hero->characteristicValues()->attach($characteristic->id, ['value' => random_int(10, 100)]);
             }
         }
     }
