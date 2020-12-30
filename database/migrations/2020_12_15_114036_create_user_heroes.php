@@ -21,7 +21,7 @@ class CreateUserHeroes extends Migration
             $table->text('note')->nullable();
             $table->timestamps();
 
-            $table->foreign('game_id')->on('games')->references('id')->onDelete('set null');
+            $table->foreign('game_id')->on('games')->references('id')->onDelete('cascade');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
         });
     }
