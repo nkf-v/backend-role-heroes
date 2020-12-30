@@ -29,7 +29,7 @@ class UserHeroCrudController extends CrudController
     public function setup()
     {
         $this->crud->setModel(UserHero::class);
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/user_hero');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/userhero');
         $this->crud->setEntityNameStrings('userhero', 'heroes');
     }
 
