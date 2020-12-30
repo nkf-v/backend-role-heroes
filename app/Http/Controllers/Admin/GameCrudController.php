@@ -92,16 +92,6 @@ class GameCrudController extends CrudController
                 'name' => 'description',
                 'label' => 'Description',
             ],
-            [
-                'type' => 'select2_multiple',
-                'name' => 'characteristics',
-                'label' => 'Characteristics',
-                'entity' => 'characteristics',
-                'model' => Characteristic::class,
-                'attribute' => 'name',
-                'pivot' => false,
-            ],
-            // TODO Add select attributes
         ]);
     }
 }
