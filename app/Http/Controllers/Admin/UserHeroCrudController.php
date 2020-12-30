@@ -61,6 +61,7 @@ class UserHeroCrudController extends CrudController
             ],
             'name',
             'game',
+            'note',
             [
                 'type' => 'table',
                 'name' => 'characteristic_values',
@@ -70,7 +71,6 @@ class UserHeroCrudController extends CrudController
                     'value' => 'Value',
                 ],
             ],
-            'note',
             [
                 'type' => 'table',
                 'name' => 'attribute_values',
