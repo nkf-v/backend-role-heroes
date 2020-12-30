@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\UserHeroRequest;
 use App\Models\Characteristic;
 use App\Models\Game;
+use App\Models\User;
 use App\Models\UserHero;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -50,6 +51,14 @@ class UserHeroCrudController extends CrudController
         $this->crud->addColumns([
             'created_at',
             'updated_at',
+            [
+                'type' => 'relationship',
+                'name' => 'user',
+                'label' => 'User',
+                'entity' => 'user',
+                'model' => User::class,
+                'attribute' => 'login',
+            ],
             'name',
             'game',
             [
