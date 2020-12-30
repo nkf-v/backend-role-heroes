@@ -62,6 +62,16 @@ class UserHeroCrudController extends CrudController
                 ],
             ],
             'note',
+            [
+                'type' => 'table',
+                'name' => 'attribute_values',
+                'label' => 'Attributes',
+                'columns' => [
+                    'name' => 'Name',
+                    'type_value' => 'Type',
+                    'value' => 'Value',
+                ],
+            ],
         ]);
     }
 }
