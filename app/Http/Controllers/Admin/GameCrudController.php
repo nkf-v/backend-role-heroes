@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\GameRequest;
+use App\Models\Attribute;
 use App\Models\Characteristic;
 use App\Models\Game;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -66,7 +67,15 @@ class GameCrudController extends CrudController
                 'entity' => 'characteristics',
                 'attribute' => 'name',
                 'model' => Characteristic::class,
-            ]
+            ],
+            [
+                'type' => 'relationship',
+                'name' => 'attributeModels',
+                'label' => 'Attributes',
+                'entity' => 'attributeModels',
+                'attribute' => 'name',
+                'model' => Attribute::class,
+            ],
         ]);
     }
 
