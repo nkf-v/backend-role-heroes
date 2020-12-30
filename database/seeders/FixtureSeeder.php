@@ -70,7 +70,7 @@ class FixtureSeeder
             $characteristic = new Characteristic();
             $characteristic->name = $this->getValueFromDatum($characteristicDatum, 'name', function () { return $this->faker->text(10); });
             $characteristic->description = $this->getValueFromDatum($characteristicDatum, 'description', function () { return $this->faker->text; });
-            $characteristic->game_id = $this->getValueFromDatum($characteristicDatum, 'description', function () use ($games) { return $this->faker->randomElement($games)->id; });
+            $characteristic->game_id = $this->getValueFromDatum($characteristicDatum, 'game_id', function () use ($games) { return $this->faker->randomElement($games)->id; });
             $characteristic->save();
         }
 
