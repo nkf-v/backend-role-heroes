@@ -39,4 +39,5 @@ class UserHero extends Model
     {
         return app(CharacteristicValueFormatter::class)->formatList($this->characteristicValues()->get());
     }
+    public function getAttributeValuesAttribute() : array { return app(AttributeValueFormatter::class)->formatList($this->attributeValues()->get()); }
 }

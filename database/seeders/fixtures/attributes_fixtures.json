@@ -1,0 +1,67 @@
+[
+    {
+        "name": "External description",
+        "attributes": [
+            {
+                "name": "Body type",
+                "game_id": 1,
+                "type_value": "string"
+            },
+            {
+                "name": "Growth",
+                "game_id": 1,
+                "type_value": "int"
+            },
+            {
+                "name": "Weight",
+                "game_id": 1,
+                "type_value": "int"
+            },
+            {
+                "name": "Gender",
+                "game_id": 1,
+                "type_value": "string"
+            },
+            {
+                "name": "Age",
+                "game_id": 1,
+                "type_value": "int"
+            }
+        ]
+    },
+    {
+        "name": "Main values",
+        "attributes": [
+            {
+                "name": "Wounds",
+                "game_id": 1,
+                "type_value": "int"
+            },
+            {
+                "name": "Madness",
+                "game_id": 1,
+                "type_value": "int"
+            },
+            {
+                "name": "Spoilage",
+                "game_id": 1,
+                "type_value": "int"
+            }
+        ]
+    },
+    {
+        "name": "Finance",
+        "attributes": [
+            {
+                "name": "Thrones",
+                "game_id": 1,
+                "type_value": "int"
+            },
+            {
+                "name": "Income",
+                "game_id": 1,
+                "type_value": "int"
+            }
+        ]
+    }
+]

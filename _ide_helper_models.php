@@ -12,6 +12,82 @@
 
 namespace App\Models{
 /**
+ * App\Models\Attribute
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property int $type_value
+ * @property int $game_id
+ * @property int|null $category_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\AttributeCategory|null $category
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereGameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereTypeValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereUpdatedAt($value)
+ */
+	class Attribute extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\AttributeCategory
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attribute[] $attributes
+ * @property-read int|null $attributes_count
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereUpdatedAt($value)
+ */
+	class AttributeCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\AttributeValue
+ *
+ * @property int $id
+ * @property int $attribute_id
+ * @property int $hero_id
+ * @property int|null $value_int
+ * @property string|null $value_string
+ * @property bool|null $value_bool
+ * @property float|null $value_double
+ * @property-read \App\Models\Attribute $attribute
+ * @property mixed $value
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereAttributeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereHeroId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueBool($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueDouble($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueInt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueString($value)
+ */
+	class AttributeValue extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Characteristic
  *
  * @property int $id
@@ -68,6 +144,8 @@ namespace App\Models{
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attribute[] $attributeModels
+ * @property-read int|null $attribute_models_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristics
  * @property-read int|null $characteristics_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserHero[] $heroes
@@ -118,6 +196,8 @@ namespace App\Models{
  * @property string|null $note
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\AttributeValue[] $attributeValues
+ * @property-read int|null $attribute_values_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristicValues
  * @property-read int|null $characteristic_values_count
  * @property-read \App\Models\Game $game

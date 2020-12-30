@@ -25,4 +25,9 @@ class Game extends Model
     {
         return $this->hasMany(Characteristic::class);
     }
+
+    public function attributeModels() : HasMany
+    {
+        return $this->hasMany(Attribute::class);
+    }
 }
