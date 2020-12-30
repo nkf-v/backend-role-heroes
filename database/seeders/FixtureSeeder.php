@@ -26,6 +26,7 @@ class FixtureSeeder
         $this->faker = app(Generator::class);
     }
 
+    // TODO Remove method
     protected function getValueFromDatum($data, $key, callable $getDefaultValue)
     {
         return (($data[$key] ?? null) === null) ? $getDefaultValue() : $data[$key];
