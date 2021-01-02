@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Formatters\AttributeValueFormatter;
-use App\Formatters\CharacteristicValueFormatter;
+use App\Formatters\Admin\AttributeValueFormatter;
+use App\Formatters\Admin\CharacteristicValueFormatter;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +28,6 @@ class UserHero extends Model
     public function characteristicValues() : BelongsToMany { return $this->belongsToMany(Characteristic::class, 'user_heroes_characteristics', 'hero_id', null)->withPivot(['value'])->where('game_id', $this->game_id); }
     public function attributeValues() : HasMany { return $this->hasMany(AttributeValue::class, 'hero_id'); }
 
-    public function getCharacteristicValuesAttribute() : array { return app(CharacteristicValueFormatter::class)->formatList($this->characteristicValues()->get()); }
-    public function getAttributeValuesAttribute() : array { return app(AttributeValueFormatter::class)->formatList($this->attributeValues()->get()); }
+    public function getTableCharacteristicValuesAttribute() : array { return app(CharacteristicValueFormatter::class)->formatList($this->characteristicValues); }
+    public function getTableAttributeValuesAttribute() : array { return app(AttributeValueFormatter::class)->formatList($this->attributeValues); }
 }

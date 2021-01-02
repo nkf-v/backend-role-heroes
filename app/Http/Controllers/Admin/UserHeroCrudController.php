@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Formatters\Admin\CharacteristicValueFormatter;
 use App\Http\Requests\UserHeroRequest;
 use App\Models\Characteristic;
 use App\Models\Game;
@@ -64,7 +65,7 @@ class UserHeroCrudController extends CrudController
             'note',
             [
                 'type' => 'table',
-                'name' => 'characteristic_values',
+                'name' => 'table_characteristic_values',
                 'label' => 'Characteristics',
                 'columns' => [
                     'name' => 'Name',
@@ -73,7 +74,7 @@ class UserHeroCrudController extends CrudController
             ],
             [
                 'type' => 'table',
-                'name' => 'attribute_values',
+                'name' => 'table_attribute_values',
                 'label' => 'Attributes',
                 'columns' => [
                     'name' => 'Name',

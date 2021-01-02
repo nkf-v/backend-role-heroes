@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Formatters;
+namespace App\Formatters\Admin;
 
 use App\Models\Characteristic;
 use Nkf\General\Classes\BaseFormatter;
