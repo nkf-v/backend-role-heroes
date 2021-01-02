@@ -2,14 +2,14 @@
 
 namespace App\Formatters\Api;
 
-use App\Models\UserHero;
+use App\Models\Hero;
 use Nkf\General\Classes\BaseFormatter;
 
 class FullHeroApiFormatter extends BaseFormatter
 {
     public function __construct(HeroCharacteristicApiFormatter $characteristicFormatter, HeroAttributeValueApiFormatter $attributeValueFormatter)
     {
-        $this->setFormatter(function (UserHero $hero) use ($characteristicFormatter, $attributeValueFormatter) : array
+        $this->setFormatter(function (Hero $hero) use ($characteristicFormatter, $attributeValueFormatter) : array
         {
             return [
                 'id' => $hero->id,

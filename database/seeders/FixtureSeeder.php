@@ -10,7 +10,7 @@ use App\Models\Characteristic;
 use App\Models\Employee;
 use App\Models\Game;
 use App\Models\User;
-use App\Models\UserHero;
+use App\Models\Hero;
 use Faker\Generator;
 use Illuminate\Support\Str;
 use Nkf\General\Utils\ArrayUtils;
@@ -101,7 +101,7 @@ class FixtureSeeder
             {
                 for ($i = random_int(5, 10); $i --> 0;)
                 {
-                    $hero = new UserHero();
+                    $hero = new Hero();
                     $hero->user_id = $userId;
                     $hero->name = $this->faker->sentence(2);
                     $hero->note = $this->faker->boolean ? null : $this->faker->text;

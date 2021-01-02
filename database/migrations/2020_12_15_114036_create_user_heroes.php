@@ -13,7 +13,7 @@ class CreateUserHeroes extends Migration
      */
     public function up()
     {
-        Schema::create('user_heroes', function (Blueprint $table) {
+        Schema::create('heroes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('game_id');
@@ -33,6 +33,6 @@ class CreateUserHeroes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_heroes');
+        Schema::dropIfExists('heroes');
     }
 }

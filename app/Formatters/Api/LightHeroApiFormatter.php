@@ -2,14 +2,14 @@
 
 namespace App\Formatters\Api;
 
-use App\Models\UserHero;
+use App\Models\Hero;
 use Nkf\General\Classes\BaseFormatter;
 
 class LightHeroApiFormatter extends BaseFormatter
 {
     public function __construct()
     {
-        $this->setFormatter(function (UserHero $hero) : array
+        $this->setFormatter(function (Hero $hero) : array
         {
             return [
                 'id' => $hero->id,

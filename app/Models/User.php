@@ -23,7 +23,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function heroes() : HasMany
     {
-        return $this->hasMany(UserHero::class);
+        return $this->hasMany(Hero::class);
     }
 
     public function getJWTIdentifier() { return $this->getKey(); }

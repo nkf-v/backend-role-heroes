@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Game;
-use App\Models\UserHero;
+use App\Models\Hero;
 use Tests\ApiTestCase;
 
 class HeroesTest extends ApiTestCase
@@ -28,20 +28,20 @@ class HeroesTest extends ApiTestCase
             ->json();
 
         foreach ($response as $hero)
-            $this->assertNotNull(UserHero::whereUserId($user->id)->find($hero['id']));
+            $this->assertNotNull(Hero::whereUserId($user->id)->find($hero['id']));
     }
 
     public function testDetailHero() : void
     {
         $user = $this->getRandomUser();
-        $hero = UserHero::whereUserId($user->id)->inRandomOrder()->first();
+        $hero = Hero::whereUserId($user->id)->inRandomOrder()->first();
 
         $this->assertNotEquals(200, $this->get('/api/heroes/' . $hero->id)->getStatusCode());
 
         $this->login($user);
         $this->get('/api/heroes/' . $hero->id)->assertSuccessful();
 
-        $hero = UserHero::where('user_id', '!=', $user->id)->inRandomOrder()->first();
+        $hero = Hero::where('user_id', '!=', $user->id)->inRandomOrder()->first();
         $this->assertResponseError(['hero' => ['not_found']], $this->get('/api/heroes/' . $hero->id));
     }
 }

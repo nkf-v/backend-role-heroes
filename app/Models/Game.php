@@ -18,7 +18,7 @@ class Game extends Model
 
     public function heroes() : HasMany
     {
-        return $this->hasMany(UserHero::class);
+        return $this->hasMany(Hero::class);
     }
 
     public function characteristics() : HasMany

@@ -149,7 +149,7 @@ namespace App\Models{
  * @property-read int|null $attribute_models_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristics
  * @property-read int|null $characteristics_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserHero[] $heroes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Hero[] $heroes
  * @property-read int|null $heroes_count
  * @method static \Illuminate\Database\Eloquent\Builder|Game newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Game newQuery()
@@ -165,32 +165,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\User
- *
- * @property int $id
- * @property string $login
- * @property string $password
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserHero[] $heroes
- * @property-read int|null $heroes_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read int|null $notifications_count
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLogin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- */
-	class User extends \Eloquent implements \Tymon\JWTAuth\Contracts\JWTSubject {}
-}
-
-namespace App\Models{
-/**
- * App\Models\UserHero
+ * App\Models\Hero
  *
  * @property int $id
  * @property string $name
@@ -207,17 +182,42 @@ namespace App\Models{
  * @property-read array $table_attribute_values
  * @property-read array $table_characteristic_values
  * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero query()
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero whereGameId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero whereNote($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserHero whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero whereGameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Hero whereUserId($value)
  */
-	class UserHero extends \Eloquent {}
+	class Hero extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\User
+ *
+ * @property int $id
+ * @property string $login
+ * @property string $password
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Hero[] $heroes
+ * @property-read int|null $heroes_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ */
+	class User extends \Eloquent implements \Tymon\JWTAuth\Contracts\JWTSubject {}
 }
 

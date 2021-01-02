@@ -34,7 +34,7 @@ class CreateAttributes extends Migration
             $table->foreign('game_id')->on('games')->references('id')->onDelete('cascade');
         });
 
-        Schema::create('attributes_user_heroes_values', function (Blueprint $table) : void
+        Schema::create('attributes_heroes_values', function (Blueprint $table) : void
         {
             $table->id();
             $table->unsignedBigInteger('attribute_id');
@@ -47,7 +47,7 @@ class CreateAttributes extends Migration
             $table->unique(['attribute_id', 'hero_id']);
 
             $table->foreign('attribute_id')->on('attributes')->references('id');
-            $table->foreign('hero_id')->on('user_heroes')->references('id');
+            $table->foreign('hero_id')->on('heroes')->references('id');
         });
     }
 
@@ -58,7 +58,7 @@ class CreateAttributes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attributes_user_heroes_values');
+        Schema::dropIfExists('attributes_heroes_values');
         Schema::dropIfExists('attributes');
         Schema::dropIfExists('attribute_categories');
     }
