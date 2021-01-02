@@ -97,33 +97,37 @@ class FixtureSeeder
 
         foreach ($userIds as $userId)
         {
-            for ($i = random_int(5, 10); $i --> 0;) {
-                $hero = new UserHero();
-                $hero->user_id = $userId;
-                $hero->name = $this->faker->sentence(2);
-                $hero->note = $this->faker->boolean ? null : $this->faker->text;
-                $hero->game_id = $this->faker->randomElement($games)->id;
-                $hero->save();
-
-                /** @var Characteristic $characteristic */
-                foreach ($hero->game->characteristics as $characteristic)
-                    $hero->characteristicValues()->attach($characteristic->id, ['value' => random_int(10, 100)]);
-
-                /** @var Attribute $attribute */
-                foreach ($hero->game->attributeModels as $attribute)
+            foreach ($games as $game)
+            {
+                for ($i = random_int(5, 10); $i --> 0;)
                 {
-                    $attributeValue = new AttributeValue();
-                    $attributeValue->hero_id = $hero->id;
-                    $attributeValue->attribute_id = $attribute->id;
-                    $value = $this->faker->sentence(random_int(1, 2));
-                    if ($attribute->type_value === AttributeTypeEnum::INT)
-                        $value = random_int(0, 100);
-                    else if ($attribute->type_value === AttributeTypeEnum::BOOL)
-                        $value = $this->faker->boolean;
-                    else if ($attribute->type_value === AttributeTypeEnum::DOUBLE)
-                        $value = $this->faker->randomFloat(2, 0, 100);
-                    $attributeValue->value = $value;
-                    $attributeValue->save();
+                    $hero = new UserHero();
+                    $hero->user_id = $userId;
+                    $hero->name = $this->faker->sentence(2);
+                    $hero->note = $this->faker->boolean ? null : $this->faker->text;
+                    $hero->game_id = $game->id;
+                    $hero->save();
+
+                    /** @var Characteristic $characteristic */
+                    foreach ($hero->game->characteristics as $characteristic)
+                        $hero->characteristicValues()->attach($characteristic->id, ['value' => random_int(10, 100)]);
+
+                    /** @var Attribute $attribute */
+                    foreach ($hero->game->attributeModels as $attribute)
+                    {
+                        $attributeValue = new AttributeValue();
+                        $attributeValue->hero_id = $hero->id;
+                        $attributeValue->attribute_id = $attribute->id;
+                        $value = $this->faker->sentence(random_int(1, 2));
+                        if ($attribute->type_value === AttributeTypeEnum::INT)
+                            $value = random_int(0, 100);
+                        else if ($attribute->type_value === AttributeTypeEnum::BOOL)
+                            $value = $this->faker->boolean;
+                        else if ($attribute->type_value === AttributeTypeEnum::DOUBLE)
+                            $value = $this->faker->randomFloat(2, 0, 100);
+                        $attributeValue->value = $value;
+                        $attributeValue->save();
+                    }
                 }
             }
         }
