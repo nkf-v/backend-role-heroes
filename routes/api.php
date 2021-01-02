@@ -11,6 +11,7 @@ Route::prefix('auth')->group(function ()
 
 Route::middleware('auth:api')->group(function ()
 {
+    Route::get('games', [GameApiController::class, 'getList']);
 
     Route::get('logout', [AuthApiController::class, 'logout']);
 });
