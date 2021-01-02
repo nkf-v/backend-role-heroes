@@ -48,7 +48,7 @@ class FixtureSeeder
         for ($i = random_int(5, 8); $i --> 1;)
         {
             $user = new User();
-            $user->login = $this->faker->userName;
+            $user->login = sprintf('test.%d', $i);
             $user->password = bcrypt('qweqwe');
             $user->save();
             $userIds[] = $user->id;
