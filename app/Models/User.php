@@ -5,10 +5,13 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use CrudTrait;
+    use Notifiable;
 
     public $timestamps = true;
     protected $fillable = [
@@ -22,4 +25,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserHero::class);
     }
+
+    public function getJWTIdentifier() { return $this->getKey(); }
+
+    public function getJWTCustomClaims() : array { return []; }
 }
