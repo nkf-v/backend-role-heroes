@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ErrorApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function ()
@@ -13,3 +14,5 @@ Route::middleware('auth:api')->group(function ()
 
     Route::get('logout', [AuthApiController::class, 'logout']);
 });
+
+Route::fallback([ErrorApiController::class, 'error']);
