@@ -23,6 +23,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\AttributeCategory|null $category
+ * @property-read \App\Models\Game $game
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute query()
@@ -203,7 +204,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristicValues
  * @property-read int|null $characteristic_values_count
  * @property-read \App\Models\Game $game
- * @property-read array $characteristic_values
+ * @property-read array $table_attribute_values
+ * @property-read array $table_characteristic_values
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserHero newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserHero newQuery()
