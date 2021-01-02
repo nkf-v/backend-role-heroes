@@ -1,0 +1,44 @@
+<?php declare(strict_types=1);
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use Tests\ApiTestCase;
+
+class AuthTest extends ApiTestCase
+{
+    public function testLogin() : void
+    {
+        $this->call('GET', '/api/auth/login', ['login' => 'test.1', 'password' => 'qweqwe'])
+            ->assertSuccessful()
+            ->assertJsonStructure([
+                'access_token',
+                'token_type',
+                'expires_in',
+            ]);
+    }
+
+    public function testRegister() : void
+    {
+        $newUser = [
+            'login' => 'test.login',
+            'password' => 'qweqwe',
+            'password_confirmation' => 'qweqwe',
+        ];
+
+        $this->call('GET', '/api/auth/register', $newUser)
+            ->assertSuccessful()
+            ->assertJsonStructure([
+                'access_token',
+                'token_type',
+                'expires_in',
+            ]);
+
+        $this->login(User::whereLogin($newUser['login'])->first());
+    }
+
+    public function testLogout() : void
+    {
+        $this->login()->call('GET', '/api/logout')->assertSuccessful()->assertJsonStructure(['message']);
+    }
+}
