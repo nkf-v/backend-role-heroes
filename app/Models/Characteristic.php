@@ -17,8 +17,5 @@ class Characteristic extends Model
        'description',
     ];
 
-    public function game() : BelongsTo
-    {
-        return $this->belongsTo(Game::class);
-    }
+    public function game() : BelongsTo { return $this->belongsTo(Game::class); }
 }
