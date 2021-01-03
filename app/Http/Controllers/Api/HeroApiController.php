@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Formatters\Api\FullHeroApiFormatter;
 use App\Formatters\Api\LightHeroApiFormatter;
 use App\Http\Requests\HeroRequest;
+use App\Http\Requests\HeroUpdateRequest;
 use App\Models\Game;
 use App\Models\Hero;
 use App\Providers\UserProvider;
@@ -99,5 +100,29 @@ class HeroApiController extends Controller
         }
 
         return $this->respondContent(['message' => 'Hero delete']);
+    }
+
+    public function updateHero(int $heroId, HeroUpdateRequest $request) : JsonResponse
+    {
+        $hero = Hero::whereUserId($this->userProvider->getUser()->id)->find($heroId);
+        if ($hero === null)
+            throw new ServerError(['hero_id' => ['invalid_value']]);
+        $updateHero = $request->validated();
+        try
+        {
+            DB::beginTransaction();
+            if (($updateHero['name'] ?? null) !== null)
+                $hero->name = $updateHero['name'];
+            if (($updateHero['note'] ?? null) !== null)
+                $hero->note = $updateHero['note'];
+            $hero->save();
+            DB::commit();
+        }
+        catch (Exception $e)
+        {
+            DB::rollBack();
+            throw new ServerError(['hero' => 'no_update']);
+        }
+        return $this->respondContent(['message' => 'Hero update']);
     }
 }

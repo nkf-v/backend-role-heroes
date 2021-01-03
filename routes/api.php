@@ -24,6 +24,7 @@ Route::middleware('auth:api')->group(function ()
     {
         Route::post('create', [HeroApiController::class, 'createHero']);
         Route::get('{hero_id}', [HeroApiController::class, 'getHero']);
+        Route::put('{hero_id}', [HeroApiController::class, 'updateHero']);
         Route::delete('{hero_id}', [HeroApiController::class, 'deleteHero']);
     });
 

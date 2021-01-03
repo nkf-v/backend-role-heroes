@@ -77,4 +77,17 @@ class HeroesTest extends ApiTestCase
             ->first();
         $this->assertResponseError(['hero_id' => ['invalid_value']], $this->delete("/api/heroes/{$hero->id}"));
     }
+
+    public function testUpdateHero() : void
+    {
+        $user = $this->getRandomUser();
+        $hero = $user->heroes()->inRandomOrder()->first();
+        $this->login($user)->put('/api/heroes/' . $hero->id)->assertSuccessful();
+
+        $hero = Hero::query()
+            ->where('user_id', '!=', $user->id)
+            ->inRandomOrder()
+            ->first();
+        $this->assertResponseError(['hero_id' => ['invalid_value']], $this->put('/api/heroes/' . $hero->id));
+    }
 }
