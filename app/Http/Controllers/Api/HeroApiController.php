@@ -24,7 +24,7 @@ class HeroApiController extends Controller
         $this->userProvider = $userProvider;
     }
 
-    public function getUserHeroesByGame(int $gameId, LightHeroApiFormatter $formatter) : JsonResponse
+    public function getHeroesByGame(int $gameId, LightHeroApiFormatter $formatter) : JsonResponse
     {
         $user = $this->userProvider->getUser();
         if (Game::find($gameId) === null)
@@ -36,7 +36,7 @@ class HeroApiController extends Controller
         return $this->respondedFormatListContent($heroes->get(), $formatter);
     }
 
-    public function getDetailHero(int $heroId, FullHeroApiFormatter $formatter) : JsonResponse
+    public function getHero(int $heroId, FullHeroApiFormatter $formatter) : JsonResponse
     {
         $hero = Hero::find($heroId);
         if ($hero === null)

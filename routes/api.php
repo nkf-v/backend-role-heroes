@@ -17,12 +17,12 @@ Route::middleware('auth:api')->group(function ()
     Route::prefix('games')->group(function ()
     {
         Route::get('/', [GameApiController::class, 'getList']);
-        Route::get('/{game_id}/heroes', [HeroApiController::class, 'getUserHeroesByGame']);
+        Route::get('{game_id}/heroes', [HeroApiController::class, 'getHeroesByGame']);
     });
 
     Route::prefix('heroes')->group(function ()
     {
-        Route::get('{hero_id}', [HeroApiController::class, 'getDetailHero']);
+        Route::get('{hero_id}', [HeroApiController::class, 'getHero']);
     });
 
     Route::get('logout', [AuthApiController::class, 'logout']);
