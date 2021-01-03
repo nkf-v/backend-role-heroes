@@ -11,26 +11,24 @@ class HeroesTest extends ApiTestCase
     public function testCreateHero() : void
     {
         $user = $this->getRandomUser();
-        $game = Game::inRandomOrder()->first();
-        $this->login($user);
-        $this->assertResponseError(['game_id' => ['invalid_value']], $this->post('/api/heroes/create', [
+        $this->login($user)->assertResponseError(['game_id' => ['invalid_value']], $this->post('/api/heroes/create', [
             'game_id' => Game::max('id') + 1,
             'name' => 'test',
         ]));
 
-        $countUserHeroes = $user->heroes()->where('game_id', $game->id)->count();
+        $game = Game::inRandomOrder()->first();
+        $countUserHeroes = $user->heroes()->count();
         $this->post('/api/heroes/create', [
             'game_id' => $game->id,
             'name' => 'test',
         ])->assertSuccessful();
-        $this->assertEquals($countUserHeroes + 1, $user->heroes()->where('game_id', $game->id)->count());
+        $this->assertEquals($countUserHeroes + 1, $user->heroes()->count());
     }
 
     public function testGetHeroes(): void
     {
         $user = $this->getRandomUser();
-        /** @var Game $game */
-        $game = $user->heroes()->first()->game;
+        $game = Game::inRandomOrder()->first();
 
         $this->assertNotEquals(200, $this->get("/api/games/{$game->id}/heroes")->getStatusCode());
         $this->login($user);
@@ -46,21 +44,25 @@ class HeroesTest extends ApiTestCase
             ->json();
 
         foreach ($response as $hero)
-            $this->assertNotNull(Hero::whereUserId($user->id)->find($hero['id']));
+            $this->assertNotNull($user->heroes()->find($hero['id']));
     }
 
     public function testDetailHero() : void
     {
         $user = $this->getRandomUser();
-        $hero = Hero::whereUserId($user->id)->inRandomOrder()->first();
+        /** @var Hero $hero */
+        $hero = $user->heroes()->inRandomOrder()->first();
 
         $this->assertNotEquals(200, $this->get('/api/heroes/' . $hero->id)->getStatusCode());
 
         $this->login($user);
         $this->get('/api/heroes/' . $hero->id)->assertSuccessful();
 
-        $hero = Hero::where('user_id', '!=', $user->id)->inRandomOrder()->first();
-        $this->assertResponseError(['hero' => ['not_found']], $this->get('/api/heroes/' . $hero->id));
+        $hero = Hero::query()
+            ->where('user_id', '!=', $user->id)
+            ->inRandomOrder()
+            ->first();
+        $this->assertResponseError(['hero_id' => ['invalid_value']], $this->get('/api/heroes/' . $hero->id));
     }
 
     public function testDeleteHero() : void

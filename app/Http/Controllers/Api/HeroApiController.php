@@ -29,25 +29,18 @@ class HeroApiController extends Controller
 
     public function getHeroesByGame(int $gameId, LightHeroApiFormatter $formatter) : JsonResponse
     {
-        $user = $this->userProvider->getUser();
         if (Game::find($gameId) === null)
             throw new ServerError(['game_id' => ['invalid_value']]);
 
-        $heroes = Hero::query()
-            ->whereUserId($user->id)
-            ->whereGameId($gameId);
-        return $this->respondedFormatListContent($heroes->get(), $formatter);
+        $heroesQuery = $this->userProvider->getUser()->heroes()->where('game_id', $gameId);
+        return $this->respondedFormatListContent($heroesQuery->get(), $formatter);
     }
 
     public function getHero(int $heroId, FullHeroApiFormatter $formatter) : JsonResponse
     {
-        $hero = Hero::find($heroId);
+        $hero = $this->userProvider->getUser()->heroes()->find($heroId);
         if ($hero === null)
             throw new ServerError(['hero_id' => ['invalid_value']]);
-
-        $user = $this->userProvider->getUser();
-        if ($hero->user_id !== $user->id)
-            throw new ServerError(['hero' => ['not_found']]);
 
         return $this->respondedFormatContent($hero, $formatter);
     }
@@ -82,8 +75,7 @@ class HeroApiController extends Controller
 
     public function deleteHero(int $heroId) : JsonResponse
     {
-        $user = $this->userProvider->getUser();
-        $hero = Hero::whereUserId($user->id)->find($heroId);
+        $hero = $this->userProvider->getUser()->heroes()->find($heroId);
         if ($hero === null)
             throw new ServerError(['hero_id' => ['invalid_value']]);
 
@@ -104,9 +96,11 @@ class HeroApiController extends Controller
 
     public function updateHero(int $heroId, HeroUpdateRequest $request) : JsonResponse
     {
-        $hero = Hero::whereUserId($this->userProvider->getUser()->id)->find($heroId);
+        /** @var Hero $hero */
+        $hero = $this->userProvider->getUser()->heroes()->find($heroId);
         if ($hero === null)
             throw new ServerError(['hero_id' => ['invalid_value']]);
+
         $updateHero = $request->validated();
         try
         {
