@@ -8,6 +8,24 @@ use Tests\ApiTestCase;
 
 class HeroesTest extends ApiTestCase
 {
+    public function testCreateHero() : void
+    {
+        $user = $this->getRandomUser();
+        $game = Game::inRandomOrder()->first();
+        $this->login($user);
+        $this->assertResponseError(['game_id' => ['invalid_value']], $this->post('/api/heroes/create', [
+            'game_id' => Game::max('id') + 1,
+            'name' => 'test',
+        ]));
+
+        $countUserHeroes = $user->heroes()->where('game_id', $game->id)->count();
+        $this->post('/api/heroes/create', [
+            'game_id' => $game->id,
+            'name' => 'test',
+        ])->assertSuccessful();
+        $this->assertEquals($countUserHeroes + 1, $user->heroes()->where('game_id', $game->id)->count());
+    }
+
     public function testGetHeroes(): void
     {
         $user = $this->getRandomUser();
@@ -43,5 +61,20 @@ class HeroesTest extends ApiTestCase
 
         $hero = Hero::where('user_id', '!=', $user->id)->inRandomOrder()->first();
         $this->assertResponseError(['hero' => ['not_found']], $this->get('/api/heroes/' . $hero->id));
+    }
+
+    public function testDeleteHero() : void
+    {
+        $user = $this->getRandomUser();
+        /** @var Hero $hero */
+        $hero = $user->heroes()->inRandomOrder()->first();
+        $this->login($user)->delete("/api/heroes/{$hero->id}")->assertSuccessful();
+        $this->assertResponseError(['hero_id' => ['invalid_value']], $this->delete("/api/heroes/{$hero->id}"));
+
+        $hero = Hero::query()
+            ->where('user_id', '!=', $user->id)
+            ->inRandomOrder()
+            ->first();
+        $this->assertResponseError(['hero_id' => ['invalid_value']], $this->delete("/api/heroes/{$hero->id}"));
     }
 }

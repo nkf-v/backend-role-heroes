@@ -22,7 +22,9 @@ Route::middleware('auth:api')->group(function ()
 
     Route::prefix('heroes')->group(function ()
     {
+        Route::post('create', [HeroApiController::class, 'createHero']);
         Route::get('{hero_id}', [HeroApiController::class, 'getHero']);
+        Route::delete('{hero_id}', [HeroApiController::class, 'deleteHero']);
     });
 
     Route::get('logout', [AuthApiController::class, 'logout']);

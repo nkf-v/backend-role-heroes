@@ -11,7 +11,6 @@ class HeroRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:255',
             'game_id' => 'required|integer',
-            'user_id' => 'required|integer',
             'note' => 'nullable|string',
         ];
     }
