@@ -22,6 +22,26 @@ class Hero extends Model
         'user_Id',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::created(function (self $hero) : void
+        {
+            $hero->characteristicValues()->sync($hero->game->characteristics);
+            Attribute::whereGameId($hero->game_id)
+                ->get()
+                ->each(function (Attribute $attribute) use ($hero) : void
+                {
+                    $attributeValue = new AttributeValue();
+                    $attributeValue->hero_id = $hero->id;
+                    $attributeValue->attribute_id = $attribute->id;
+                    $attributeValue->save();
+                });
+        });
+    }
+
+
     public function game() : BelongsTo { return $this->belongsTo(Game::class); }
     public function user() : BelongsTo { return $this->belongsTo(User::class); }
 
