@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AttributeValue extends Model
 {
-    public $table = 'attributes_heroes_values';
+    public $table = 'heroes_attribute_values';
     public $timestamps = false;
 
     public function attribute() : BelongsTo { return $this->belongsTo(Attribute::class); }

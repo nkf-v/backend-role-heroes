@@ -25,8 +25,13 @@ class Hero extends Model
     public function game() : BelongsTo { return $this->belongsTo(Game::class); }
     public function user() : BelongsTo { return $this->belongsTo(User::class); }
 
-    public function characteristicValues() : BelongsToMany { return $this->belongsToMany(Characteristic::class, 'heroes_characteristics', 'hero_id', null)->withPivot(['value'])->where('game_id', $this->game_id); }
-    public function attributeValues() : HasMany { return $this->hasMany(AttributeValue::class, 'hero_id'); }
+    public function characteristicValues() : BelongsToMany
+    {
+        return $this->belongsToMany(Characteristic::class, 'heroes_characteristics', 'hero_id')
+            ->withPivot('value')
+            ->where('game_id', $this->game_id);
+    }
+    public function attributeValues() : HasMany { return $this->hasMany(AttributeValue::class, 'hero_id')->with('attribute'); }
 
     public function getTableCharacteristicValuesAttribute() : array { return app(CharacteristicValueFormatter::class)->formatList($this->characteristicValues); }
     public function getTableAttributeValuesAttribute() : array { return app(AttributeValueFormatter::class)->formatList($this->attributeValues); }

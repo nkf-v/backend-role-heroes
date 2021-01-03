@@ -30,8 +30,8 @@ class CreateCharacteristics extends Migration
             $table->id();
             $table->unsignedBigInteger('hero_id');
             $table->unsignedBigInteger('characteristic_id');
-            $table->integer('value');
-            $table->unique(['hero_id', 'characteristic_id', 'value']);
+            $table->integer('value')->nullable();
+            $table->unique(['hero_id', 'characteristic_id']);
 
             $table->foreign('hero_id')->on('heroes')->references('id')->onDelete('cascade');
             $table->foreign('characteristic_id')->on('characteristics')->references('id')->onDelete('cascade');
