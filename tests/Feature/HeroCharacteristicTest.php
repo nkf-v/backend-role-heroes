@@ -29,6 +29,6 @@ class HeroCharacteristicTest extends ApiTestCase
             ->first();
         $this->assertResponseError(['hero_id' => ['invalid_value']], $this->put("/api/heroes/{$hero->id}/characteristics/{$characteristic->id}/value", ['value' => $value]));
 
-        // TODO: add assert for other characteristics
+        // TODO: add assert for other games
     }
 }
