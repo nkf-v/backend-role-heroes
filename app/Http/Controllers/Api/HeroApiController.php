@@ -12,11 +12,10 @@ use App\Providers\UserProvider;
 use DB;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Controller;
 use Nkf\Laravel\Classes\Exceptions\ServerError;
 use Nkf\Laravel\Traits\ApiController;
 
-class HeroApiController extends Controller
+class HeroApiController
 {
     use ApiController;
 

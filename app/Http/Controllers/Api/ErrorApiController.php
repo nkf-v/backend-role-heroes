@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Controller;
 use Nkf\Laravel\Traits\ApiController;
 
-class ErrorApiController extends Controller
+class ErrorApiController
 {
     use ApiController;
 

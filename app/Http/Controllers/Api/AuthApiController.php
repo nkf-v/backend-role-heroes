@@ -7,13 +7,11 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Providers\UserProvider;
 use Auth;
-use Grpc\Server;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Controller;
 use Nkf\Laravel\Classes\Exceptions\ServerError;
 use Nkf\Laravel\Traits\ApiController;
 
-class AuthApiController extends Controller
+class AuthApiController
 {
     use ApiController;
 

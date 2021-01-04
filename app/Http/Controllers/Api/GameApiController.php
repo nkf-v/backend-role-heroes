@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Formatters\Api\GameApiFormatter;
 use App\Models\Game;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Controller;
 use Nkf\Laravel\Traits\ApiController;
 
-class GameApiController extends Controller
+class GameApiController
 {
     use ApiController;
 
