@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\ErrorApiController;
 use App\Http\Controllers\Api\GameApiController;
 use App\Http\Controllers\Api\HeroApiController;
+use App\Http\Controllers\Api\HeroAttributeApiController;
 use App\Http\Controllers\Api\HeroCharacteristicApiController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::middleware('auth:api')->group(function ()
         Route::delete('{hero_id}', [HeroApiController::class, 'deleteHero']);
 
         Route::put('{hero_id}/characteristics/{characteristic_id}/value', [HeroCharacteristicApiController::class, 'updateCharacteristicValue']);
+        Route::put('{hero_id}/attributes/{attribute_id}/value', [HeroAttributeApiController::class, 'updateAttributeValue']);
     });
 
     Route::get('logout', [AuthApiController::class, 'logout']);
