@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Formatters\Admin\AttributeValueFormatter;
 use App\Formatters\Admin\CharacteristicValueFormatter;
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,8 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Hero extends Model
 {
-    use CrudTrait;
-
     public $timestamps = true;
     protected $fillable = [
         'name',

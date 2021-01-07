@@ -3,14 +3,11 @@
 namespace App\Models;
 
 use App\Enums\AttributeTypeEnum;
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Attribute extends Model
 {
-    use CrudTrait;
-
     public $timestamps = true;
     public $fillable = [
         'name',

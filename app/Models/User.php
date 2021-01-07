@@ -10,7 +10,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use CrudTrait;
     use Notifiable;
 
     public $timestamps = true;
