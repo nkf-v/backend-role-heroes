@@ -33,13 +33,13 @@ class AuthApiController
         $user->login = $newUser['login'];
         $user->password = bcrypt($newUser['password']);
         $user->save();
-        return $this->responseWithToken(Auth::login($user));
+        return $this->responseWithToken(Auth::guard('api')->login($user));
     }
 
     public function login(LoginRequest $request) : JsonResponse
     {
         $credentials = $request->validated();
-        $token = auth()->attempt($credentials);
+        $token = auth('api')->attempt($credentials);
 
         if (!$token)
             throw new ServerError(['login' => ['invalid_login_password']]);
@@ -49,7 +49,7 @@ class AuthApiController
 
     public function logout() : JsonResponse
     {
-        Auth::logout();
+        Auth::guard('api')->logout();
         return $this->respondContent(['message' => 'Successful logged out']);
     }
 }
