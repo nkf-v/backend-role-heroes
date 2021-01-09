@@ -2,16 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class Employee extends Authenticatable
+class Employee extends \Orchid\Platform\Models\User
 {
-    public $timestamps = true;
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    protected $hidden = ['password'];
+    protected $table = 'employees';
 }

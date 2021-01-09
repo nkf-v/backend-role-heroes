@@ -40,7 +40,13 @@ class FixtureSeeder
             $employee->name = sprintf('admin%s', $i + 1);
             $employee->email = sprintf('admin%s@email.com', $i + 1);
             $employee->password = bcrypt('qweqwe');
-            $employee->remember_token = Str::random(10);
+            $employee->permissions = [
+                'platform.index' => true,
+                'platform.systems.index' => true,
+                'platform.systems.roles' => true,
+                'platform.systems.users' => true,
+                'platform.systems.attachment' => true,
+            ];
             $employee->save();
         }
 

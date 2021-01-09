@@ -122,14 +122,30 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property array|null $permissions
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Orchid\Platform\Models\Role[] $roles
+ * @property-read int|null $roles_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User countByDays($startDate = null, $stopDate = null, string $dateColumn = 'created_at')
+ * @method static \Illuminate\Database\Eloquent\Builder|User countForGroup(string $groupColumn)
+ * @method static \Illuminate\Database\Eloquent\Builder|User defaultSort(string $column, string $direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|User filters(?\Orchid\Filters\HttpFilter $httpFilter = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filtersApply(array $filters = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|User filtersApplySelection($selection)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Employee newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Employee query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User sumByDays(string $value, $startDate = null, $stopDate = null, string $dateColumn = 'created_at')
+ * @method static \Illuminate\Database\Eloquent\Builder|User valuesByDays(string $value, $startDate = null, $stopDate = null, string $dateColumn = 'created_at')
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Employee whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Employee wherePermissions($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereUpdatedAt($value)
  */
