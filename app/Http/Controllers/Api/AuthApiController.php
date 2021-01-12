@@ -57,4 +57,11 @@ class AuthApiController
     {
         return $this->responseWithToken(Auth::guard('api')->refresh());
     }
+
+    public function check() : JsonResponse
+    {
+        if ($this->userProvider->getOptionalUser() === null)
+            throw new ServerError(['user' => ['no_auth']]);
+        return $this->respondContent(['message' => 'KEKW']);
+    }
 }

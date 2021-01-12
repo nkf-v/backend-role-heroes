@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function ()
 {
+    Route::get('check', [AuthApiController::class, 'check'])->name('login');
     Route::get('login', [AuthApiController::class, 'login']);
     Route::get('register', [AuthApiController::class, 'register']);
 });

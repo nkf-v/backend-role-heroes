@@ -47,4 +47,10 @@ class AuthTest extends ApiTestCase
         $this->login();
         $this->get('/api/auth/refresh')->assertSuccessful();
     }
+
+    public function testCheckAuth() : void
+    {
+        $this->assertResponseError(['user' => ['no_auth']], $this->get('/api/auth/check'));
+        $this->login()->get('/api/auth/check')->assertSuccessful();
+    }
 }
