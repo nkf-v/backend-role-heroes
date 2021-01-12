@@ -52,4 +52,9 @@ class AuthApiController
         Auth::guard('api')->logout();
         return $this->respondContent(['message' => 'Successful logged out']);
     }
+
+    public function refresh() : JsonResponse
+    {
+        return $this->responseWithToken(Auth::guard('api')->refresh());
+    }
 }

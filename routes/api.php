@@ -34,6 +34,7 @@ Route::middleware('auth:api')->group(function ()
     });
 
     Route::get('logout', [AuthApiController::class, 'logout']);
+    Route::get('auth/refresh', [AuthApiController::class, 'refresh']);
 });
 
 Route::fallback([ErrorApiController::class, 'error']);

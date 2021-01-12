@@ -41,4 +41,10 @@ class AuthTest extends ApiTestCase
     {
         $this->login()->call('GET', '/api/logout')->assertSuccessful()->assertJsonStructure(['message']);
     }
+
+    public function testRefresh() : void
+    {
+        $this->login();
+        $this->get('/api/auth/refresh')->assertSuccessful();
+    }
 }
