@@ -35,6 +35,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereTypeValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Attribute extends \Eloquent {}
 }
@@ -56,6 +57,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class AttributeCategory extends \Eloquent {}
 }
@@ -83,6 +85,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueDouble($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueInt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueString($value)
+ * @mixin \Eloquent
  */
 	class AttributeValue extends \Eloquent {}
 }
@@ -107,6 +110,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Characteristic extends \Eloquent {}
 }
@@ -148,6 +152,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Employee wherePermissions($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Employee extends \Eloquent {}
 }
@@ -175,6 +180,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Game whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Game whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Game whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Game extends \Eloquent {}
 }
@@ -208,6 +214,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Hero whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Hero whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Hero whereUserId($value)
+ * @mixin \Eloquent
  */
 	class Hero extends \Eloquent {}
 }
@@ -233,6 +240,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLogin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class User extends \Eloquent implements \Tymon\JWTAuth\Contracts\JWTSubject {}
 }
