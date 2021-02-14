@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\User;
+namespace App\Orchid\Layouts\Employee;
 
 use App\Models\Employee;
 use Orchid\Screen\Actions\Button;

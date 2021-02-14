@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\User;
+namespace App\Orchid\Layouts\Employee;
 
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Rows;

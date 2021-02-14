@@ -7,7 +7,7 @@ use Orchid\Screen\Contracts\Personable;
 use Orchid\Screen\Contracts\Searchable;
 use Orchid\Support\Presenter;
 
-class EmployeePresenter extends Presenter implements Searchable, Personable
+class UserPresenter extends Presenter implements Searchable, Personable
 {
     public function label() : string
     {

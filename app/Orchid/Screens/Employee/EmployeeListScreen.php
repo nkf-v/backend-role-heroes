@@ -3,9 +3,9 @@
 namespace App\Orchid\Screens\Employee;
 
 use App\Models\Employee;
-use App\Orchid\Layouts\User\EmployeeEditLayout;
-use App\Orchid\Layouts\User\EmployeeFiltersLayout;
-use App\Orchid\Layouts\User\EmployeeListLayout;
+use App\Orchid\Layouts\Employee\EmployeeEditLayout;
+use App\Orchid\Layouts\Employee\EmployeeFiltersLayout;
+use App\Orchid\Layouts\Employee\EmployeeListLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;

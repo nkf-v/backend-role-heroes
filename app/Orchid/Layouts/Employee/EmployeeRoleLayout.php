@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\User;
+namespace App\Orchid\Layouts\Employee;
 
 use Orchid\Platform\Models\Role;
 use Orchid\Screen\Fields\Select;
