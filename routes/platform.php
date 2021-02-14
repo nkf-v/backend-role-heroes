@@ -12,9 +12,9 @@ use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
-use App\Orchid\Screens\User\UserEditScreen;
-use App\Orchid\Screens\User\UserListScreen;
-use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\Employee\EmployeeEditScreen;
+use App\Orchid\Screens\Employee\EmployeeListScreen;
+use App\Orchid\Screens\Employee\EmployeeProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -34,7 +34,7 @@ Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
 
 // Platform > Profile
-Route::screen('profile', UserProfileScreen::class)
+Route::screen('profile', EmployeeProfileScreen::class)
     ->name('platform.profile')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
@@ -42,22 +42,22 @@ Route::screen('profile', UserProfileScreen::class)
             ->push(__('Profile'), route('platform.profile'));
     });
 
-// Platform > System > Users
-Route::screen('users/{users}/edit', UserEditScreen::class)
-    ->name('platform.systems.users.edit')
-    ->breadcrumbs(function (Trail $trail, $user) {
+// Platform > System > Employees
+Route::screen('employees/{employees}/edit', EmployeeEditScreen::class)
+    ->name('platform.systems.employees.edit')
+    ->breadcrumbs(function (Trail $trail, $employee) {
         return $trail
-            ->parent('platform.systems.users')
-            ->push(__('Edit'), route('platform.systems.users.edit', $user));
+            ->parent('platform.systems.employees')
+            ->push(__('Edit'), route('platform.systems.employees.edit', $employee));
     });
 
-// Platform > System > Users > User
-Route::screen('users', UserListScreen::class)
-    ->name('platform.systems.users')
+// Platform > System > Employees > Employee
+Route::screen('employees', EmployeeListScreen::class)
+    ->name('platform.systems.employees')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.systems.index')
-            ->push(__('Users'), route('platform.systems.users'));
+            ->push(__('Users'), route('platform.systems.employees'));
     });
 
 // Platform > System > Roles > Role

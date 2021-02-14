@@ -1,16 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
+namespace App\Orchid\Screens\Employee;
 
-namespace App\Orchid\Screens\User;
-
+use App\Models\Employee;
+use App\Orchid\Access\EmployeeSwitch;
 use App\Orchid\Layouts\Role\RolePermissionLayout;
-use App\Orchid\Layouts\User\UserEditLayout;
-use App\Orchid\Layouts\User\UserRoleLayout;
+use App\Orchid\Layouts\User\EmployeeEditLayout;
+use App\Orchid\Layouts\User\EmployeeRoleLayout;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Orchid\Access\UserSwitch;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -18,64 +17,37 @@ use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
-class UserEditScreen extends Screen
+class EmployeeEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'User';
-
-    /**
-     * Display header description.
-     *
-     * @var string
-     */
+    public $name = 'Employee';
     public $description = 'Details such as name, email and password';
+    public $permission = 'platform.systems.employees';
+    /** @var Employee */
+    private $employee;
 
-    /**
-     * @var string
-     */
-    public $permission = 'platform.systems.users';
-
-    /**
-     * @var User
-     */
-    private $user;
-
-    /**
-     * Query data.
-     *
-     * @param User $user
-     *
-     * @return array
-     */
-    public function query(User $user): array
+    public function query(Employee $employee) : array
     {
-        $this->user = $user;
+        $this->employee = $employee;
 
-        $user->load(['roles']);
+        $employee->load(['roles']);
 
         return [
-            'user'       => $user,
-            'permission' => $user->getStatusPermission(),
+            'employee'       => $employee,
+            'permission' => $employee->getStatusPermission(),
         ];
     }
 
     /**
-     * Button commands.
-     *
      * @return Action[]
      */
-    public function commandBar(): array
+    public function commandBar() : array
     {
         return [
-            Button::make(__('Impersonate user'))
+            Button::make(__('Impersonate employee'))
                 ->icon('login')
                 ->confirm('You can revert to your original state by logging out.')
                 ->method('loginAs')
-                ->canSee(\request()->user()->id !== $this->user->id),
+                ->canSee(\request()->user()->id !== $this->employee->id),
 
             Button::make(__('Remove'))
                 ->icon('trash')
@@ -91,11 +63,11 @@ class UserEditScreen extends Screen
     /**
      * @return \Orchid\Screen\Layout[]
      */
-    public function layout(): array
+    public function layout() : array
     {
         return [
 
-            Layout::block(UserEditLayout::class)
+            Layout::block(EmployeeEditLayout::class)
                 ->title(__('Profile Information'))
                 ->description(__('Update your account\'s profile information and email address.'))
                 ->commands(
@@ -105,9 +77,9 @@ class UserEditScreen extends Screen
                         ->method('save')
                 ),
 
-            Layout::block(UserRoleLayout::class)
+            Layout::block(EmployeeRoleLayout::class)
                 ->title(__('Roles'))
-                ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.'))
+                ->description(__('A Role defines a set of tasks a employee assigned the role is allowed to perform.'))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
@@ -128,18 +100,12 @@ class UserEditScreen extends Screen
         ];
     }
 
-    /**
-     * @param User    $user
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function save(User $user, Request $request)
+    public function save(Employee $employee, Request $request) : RedirectResponse
     {
         $request->validate([
-            'user.email' => [
+            'employee.email' => [
                 'required',
-                Rule::unique(User::class, 'email')->ignore($user),
+                Rule::unique(Employee::class, 'email')->ignore($employee),
             ],
         ]);
 
@@ -150,45 +116,33 @@ class UserEditScreen extends Screen
             ->collapse()
             ->toArray();
 
-        $user
-            ->fill($request->get('user'))
-            ->replaceRoles($request->input('user.roles'))
+        $employee
+            ->fill($request->get('employee'))
+            ->replaceRoles($request->input('employee.roles'))
             ->fill([
                 'permissions' => $permissions,
             ])
             ->save();
 
-        Toast::info(__('User was saved.'));
+        Toast::info(__('Employee was saved.'));
 
-        return redirect()->route('platform.systems.users');
+        return redirect()->route('platform.systems.employees');
     }
 
-    /**
-     * @param User $user
-     *
-     * @throws \Exception
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function remove(User $user)
+    public function remove(Employee $employee) : RedirectResponse
     {
-        $user->delete();
+        $employee->delete();
 
-        Toast::info(__('User was removed'));
+        Toast::info(__('Employee was removed'));
 
-        return redirect()->route('platform.systems.users');
+        return redirect()->route('platform.systems.employees');
     }
 
-    /**
-     * @param User $user
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function loginAs(User $user)
+    public function loginAs(Employee $employee) : RedirectResponse
     {
-        UserSwitch::loginAs($user);
+        EmployeeSwitch::loginAs($employee);
 
-        Toast::info(__('You are now impersonating this user'));
+        Toast::info(__('You are now impersonating this employee'));
 
         return redirect()->route(config('platform.index'));
     }

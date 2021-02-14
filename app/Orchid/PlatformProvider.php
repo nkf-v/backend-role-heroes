@@ -57,10 +57,10 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label(__('Users'))
                 ->place('Auth')
                 ->icon('user')
-                ->route('platform.systems.users')
-                ->permission('platform.systems.users')
+                ->route('platform.systems.employees')
+                ->permission('platform.systems.employees')
                 ->sort(1000)
-                ->title(__('All registered users')),
+                ->title(__('All registered employees')),
 
             ItemMenu::label(__('Roles'))
                 ->place('Auth')
@@ -80,7 +80,7 @@ class PlatformProvider extends OrchidServiceProvider
         return [
             ItemPermission::group(__('Systems'))
                 ->addPermission('platform.systems.roles', __('Roles'))
-                ->addPermission('platform.systems.users', __('Users')),
+                ->addPermission('platform.systems.employees', __('Employees')),
         ];
     }
 

@@ -8,7 +8,7 @@ use Orchid\Platform\Models\Role;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
-class UserRoleLayout extends Rows
+class EmployeeRoleLayout extends Rows
 {
     /**
      * Views.
@@ -18,7 +18,7 @@ class UserRoleLayout extends Rows
     public function fields(): array
     {
         return [
-            Select::make('user.roles.')
+            Select::make('employee.roles.')
                 ->fromModel(Role::class, 'name')
                 ->multiple()
                 ->title(__('Name role'))

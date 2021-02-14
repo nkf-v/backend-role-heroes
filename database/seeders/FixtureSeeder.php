@@ -44,7 +44,7 @@ class FixtureSeeder
                 'platform.index' => true,
                 'platform.systems.index' => true,
                 'platform.systems.roles' => true,
-                'platform.systems.users' => true,
+                'platform.systems.employees' => true,
                 'platform.systems.attachment' => true,
             ];
             $employee->save();
