@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Orchid\Screen\AsSource;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable, AsSource;
 
     public $timestamps = true;
     protected $fillable = [
@@ -19,10 +20,7 @@ class User extends Authenticatable implements JWTSubject
 
     protected $hidden = ['password'];
 
-    public function heroes() : HasMany
-    {
-        return $this->hasMany(Hero::class);
-    }
+    public function heroes() : HasMany { return $this->hasMany(Hero::class);}
 
     public function getJWTIdentifier() { return $this->getKey(); }
 

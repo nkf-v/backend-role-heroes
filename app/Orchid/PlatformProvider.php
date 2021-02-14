@@ -25,7 +25,10 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-
+            ItemMenu::label(__('Users'))
+                ->route('platform.users')
+                ->icon('user')
+                ->title(__('Main')),
         ];
     }
 

@@ -15,6 +15,8 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\Employee\EmployeeEditScreen;
 use App\Orchid\Screens\Employee\EmployeeListScreen;
 use App\Orchid\Screens\Employee\EmployeeProfileScreen;
+use App\Orchid\Screens\User\UserDetailScreen;
+use App\Orchid\Screens\User\UserListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -81,10 +83,27 @@ Route::screen('roles/create', RoleEditScreen::class)
 // Platform > System > Roles
 Route::screen('roles', RoleListScreen::class)
     ->name('platform.systems.roles')
-    ->breadcrumbs(function (Trail $trail) {
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
         return $trail
             ->parent('platform.systems.index')
             ->push(__('Roles'), route('platform.systems.roles'));
     });
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
+
+Route::screen('users', UserListScreen::class)
+    ->name('platform.users')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail->push(__('Users'), route('platform.users'));
+    });
+
+Route::screen('users/{user}/detail', UserDetailScreen::class)
+    ->name('platform.users.detail')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail
+            ->push(__('Users'), route('platform.users'))
+            ->push(__('User'));
+    });
