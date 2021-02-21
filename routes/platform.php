@@ -90,7 +90,7 @@ Route::screen('users', UserListScreen::class)
         return $trail->push(__('Users'), route('platform.users'));
     });
 
-Route::screen('users/{user}/detail', UserDetailScreen::class)
+Route::screen('user/{user}', UserDetailScreen::class)
     ->name('platform.users.detail')
     ->breadcrumbs(function (Trail $trail) : Trail
     {
