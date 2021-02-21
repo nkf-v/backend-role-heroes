@@ -29,6 +29,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.users')
                 ->icon('user')
                 ->title(__('Main')),
+            ItemMenu::label(__('Games'))
+                ->route('platform.games.list')
+                ->icon('notebook'),
         ];
     }
 

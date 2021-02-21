@@ -1,20 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
-
-use App\Orchid\Screens\Examples\ExampleCardsScreen;
-use App\Orchid\Screens\Examples\ExampleChartsScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsScreen;
-use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
-use App\Orchid\Screens\Examples\ExampleScreen;
-use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
-use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\Role\RoleEditScreen;
-use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\Employee\EmployeeEditScreen;
 use App\Orchid\Screens\Employee\EmployeeListScreen;
 use App\Orchid\Screens\Employee\EmployeeProfileScreen;
+use App\Orchid\Screens\Game\GameEditScreen;
+use App\Orchid\Screens\Game\GameListScreen;
+use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Role\RoleEditScreen;
+use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserDetailScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use Illuminate\Support\Facades\Route;
@@ -90,8 +83,6 @@ Route::screen('roles', RoleListScreen::class)
             ->push(__('Roles'), route('platform.systems.roles'));
     });
 
-//Route::screen('idea', 'Idea::class','platform.screens.idea');
-
 Route::screen('users', UserListScreen::class)
     ->name('platform.users')
     ->breadcrumbs(function (Trail $trail) : Trail
@@ -107,3 +98,14 @@ Route::screen('users/{user}/detail', UserDetailScreen::class)
             ->push(__('Users'), route('platform.users'))
             ->push(__('User'));
     });
+
+Route::screen('games', GameListScreen::class)
+    ->name('platform.games.list')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail
+            ->push(__('Games'), route('platform.games.list'));
+    });
+
+Route::screen('game/{game?}', GameEditScreen::class)
+    ->name('platform.games.edit');
