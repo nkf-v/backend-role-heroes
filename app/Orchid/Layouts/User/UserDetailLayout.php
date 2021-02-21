@@ -9,8 +9,6 @@ use Orchid\Screen\Layouts\Rows;
 
 class UserDetailLayout extends Rows
 {
-    public const READ_ONLY = true;
-
     /**
      * @return Field[]
      */
@@ -19,16 +17,16 @@ class UserDetailLayout extends Rows
         return [
             DateTimer::make('user.created_at')
                 ->title('Created')
-                ->disabled(self::READ_ONLY),
+                ->disabled(),
             DateTimer::make('user.updated_at')
                 ->title('Updated')
-                ->disabled(self::READ_ONLY),
+                ->disabled(),
             Input::make('user.login')
                 ->title('Login')
-                ->readonly(self::READ_ONLY),
+                ->readonly(),
             Input::make('user.heroes_count')
                 ->title('Heroes count')
-                ->readonly(self::READ_ONLY)
+                ->readonly()
         ];
     }
 }
