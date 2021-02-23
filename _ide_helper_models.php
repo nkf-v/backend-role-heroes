@@ -22,7 +22,7 @@ namespace App\Models{
  * @property int|null $category_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\AttributeCategory|null $category
+ * @property-read \App\Models\Category|null $category
  * @property-read \App\Models\Game $game
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute newQuery()
@@ -35,31 +35,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereTypeValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class Attribute extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\AttributeCategory
- *
- * @property int $id
- * @property string $name
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attribute[] $attributes
- * @property-read int|null $attributes_count
- * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory query()
- * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AttributeCategory whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class AttributeCategory extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -85,9 +62,31 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueDouble($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueInt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueString($value)
- * @mixin \Eloquent
  */
 	class AttributeValue extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Category
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $sort_order
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attribute[] $attributes
+ * @property-read int|null $attributes_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
+ */
+	class Category extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -110,7 +109,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class Characteristic extends \Eloquent {}
 }
@@ -152,7 +150,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Employee wherePermissions($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class Employee extends \Eloquent {}
 }
@@ -180,7 +177,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Game whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Game whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Game whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class Game extends \Eloquent {}
 }
@@ -214,7 +210,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Hero whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Hero whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Hero whereUserId($value)
- * @mixin \Eloquent
  */
 	class Hero extends \Eloquent {}
 }
@@ -240,7 +235,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLogin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class User extends \Eloquent implements \Tymon\JWTAuth\Contracts\JWTSubject {}
 }

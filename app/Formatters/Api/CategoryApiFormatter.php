@@ -2,14 +2,14 @@
 
 namespace App\Formatters\Api;
 
-use App\Models\AttributeCategory;
+use App\Models\Category;
 use Nkf\General\Classes\BaseFormatter;
 
 class CategoryApiFormatter extends BaseFormatter
 {
     public function __construct()
     {
-        $this->setFormatter(function (AttributeCategory $category) : array
+        $this->setFormatter(function (Category $category) : array
         {
             return [
                 'id' => $category->id,

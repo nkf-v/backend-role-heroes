@@ -18,7 +18,7 @@ class Attribute extends Model
     ];
 
     public function game() : BelongsTo { return $this->belongsTo(Game::class); }
-    public function category() : BelongsTo { return $this->belongsTo(AttributeCategory::class, 'category_id'); }
+    public function category() : BelongsTo { return $this->belongsTo(Category::class, 'category_id'); }
 
     static public function getTypeValueOptions() : array { return AttributeTypeEnum::getLabels(); }
 
