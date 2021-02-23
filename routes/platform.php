@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use App\Orchid\Screens\Category\CategoryEditScreen;
+use App\Orchid\Screens\Category\CategoryListScreen;
 use App\Orchid\Screens\Employee\EmployeeEditScreen;
 use App\Orchid\Screens\Employee\EmployeeListScreen;
 use App\Orchid\Screens\Employee\EmployeeProfileScreen;
@@ -84,7 +86,7 @@ Route::screen('roles', RoleListScreen::class)
     });
 
 Route::screen('users', UserListScreen::class)
-    ->name('platform.users')
+    ->name('platform.users') // TODO add list
     ->breadcrumbs(function (Trail $trail) : Trail
     {
         return $trail->push(__('Users'), route('platform.users'));
@@ -109,3 +111,9 @@ Route::screen('games', GameListScreen::class)
 
 Route::screen('game/{game?}', GameEditScreen::class)
     ->name('platform.games.edit');
+
+Route::screen('categories', CategoryListScreen::class)
+    ->name('platform.categories.list'); // TODO add breadcrumbs
+
+Route::screen('category/{category?}', CategoryEditScreen::class)
+    ->name('platform.categories.edit');

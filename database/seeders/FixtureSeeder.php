@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\AttributeTypeEnum;
 use App\Models\Attribute;
-use App\Models\AttributeCategory;
+use App\Models\Category;
 use App\Models\AttributeValue;
 use App\Models\Characteristic;
 use App\Models\Employee;
@@ -84,7 +84,7 @@ class FixtureSeeder
         $categoryData = JsonUtils::decodeFile(PathUtils::join(__DIR__, 'fixtures', 'attributes_fixtures.json'));
         foreach ($categoryData as $categoryDatum)
         {
-            $category = new AttributeCategory();
+            $category = new Category();
             $category->name = $this->getValueFromDatum($categoryDatum, 'name', function () { return $this->faker->sentence(random_int(1, 2)); });
             $category->save();
 
