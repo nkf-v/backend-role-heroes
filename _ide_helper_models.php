@@ -74,7 +74,6 @@ namespace App\Models{
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $sort_order
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attribute[] $attributes
  * @property-read int|null $attributes_count
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
@@ -83,7 +82,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
  */
 	class Category extends \Eloquent {}
