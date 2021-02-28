@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Orchid\Screen\AsSource;
 
 class Characteristic extends Model
 {
+    use AsSource;
+
     public $timestamps = true;
-    protected $fillable = [
-       'name',
-       'game_id',
-       'description',
-    ];
 
     public function game() : BelongsTo { return $this->belongsTo(Game::class); }
 }

@@ -2,6 +2,8 @@
 
 use App\Orchid\Screens\Category\CategoryEditScreen;
 use App\Orchid\Screens\Category\CategoryListScreen;
+use App\Orchid\Screens\Characteristic\CharacteristicEditScreen;
+use App\Orchid\Screens\Characteristic\CharacteristicListScreen;
 use App\Orchid\Screens\Employee\EmployeeEditScreen;
 use App\Orchid\Screens\Employee\EmployeeListScreen;
 use App\Orchid\Screens\Employee\EmployeeProfileScreen;
@@ -117,3 +119,20 @@ Route::screen('categories', CategoryListScreen::class)
 
 Route::screen('category/{category?}', CategoryEditScreen::class)
     ->name('platform.categories.edit');
+
+Route::screen('characteristics', CharacteristicListScreen::class)
+    ->name('platform.characteristics.list')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail
+            ->push(__('Characteristics'), route('platform.characteristics.list'));
+    });
+
+Route::screen('characteristic/{characteristic?}', CharacteristicEditScreen::class)
+    ->name('platform.characteristics.edit')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail
+            ->push(__('Characteristics'), route('platform.characteristics.list'))
+            ->push(__('Characteristic'));
+    });;

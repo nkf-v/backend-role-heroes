@@ -35,6 +35,9 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label(__('Categories'))
                 ->route('platform.categories.list')
                 ->icon('browser'),
+            ItemMenu::label(__('Characteristics'))
+                ->route('platform.characteristics.list')
+                ->icon('list'),
         ];
     }
 
