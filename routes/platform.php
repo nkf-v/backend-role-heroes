@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use App\Orchid\Screens\Attribute\AttributeEditScreen;
+use App\Orchid\Screens\Attribute\AttributeListScreen;
 use App\Orchid\Screens\Category\CategoryEditScreen;
 use App\Orchid\Screens\Category\CategoryListScreen;
 use App\Orchid\Screens\Characteristic\CharacteristicEditScreen;
@@ -136,3 +138,20 @@ Route::screen('characteristic/{characteristic?}', CharacteristicEditScreen::clas
             ->push(__('Characteristics'), route('platform.characteristics.list'))
             ->push(__('Characteristic'));
     });;
+
+Route::screen('attributes', AttributeListScreen::class)
+    ->name('platform.attributes.list')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail
+            ->push(__('Attributes'), route('platform.attributes.list'));
+    });
+
+Route::screen('attribute/{attribute?}', AttributeEditScreen::class)
+    ->name('platform.attributes.edit')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail
+            ->push(__('Attributes'), route('platform.attributes.list'))
+            ->push(__('Attribute'));
+    });
