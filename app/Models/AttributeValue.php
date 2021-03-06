@@ -5,11 +5,15 @@ namespace App\Models;
 use App\Enums\AttributeTypeEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Orchid\Screen\AsSource;
 
 class AttributeValue extends Model
 {
+    use AsSource;
+
     public $table = 'heroes_attribute_values';
     public $timestamps = false;
+    protected $appends = ['value'];
 
     public function attribute() : BelongsTo { return $this->belongsTo(Attribute::class); }
 

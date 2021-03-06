@@ -11,6 +11,8 @@ use App\Orchid\Screens\Employee\EmployeeListScreen;
 use App\Orchid\Screens\Employee\EmployeeProfileScreen;
 use App\Orchid\Screens\Game\GameEditScreen;
 use App\Orchid\Screens\Game\GameListScreen;
+use App\Orchid\Screens\Hero\HeroDetailScreen;
+use App\Orchid\Screens\Hero\HeroListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -154,4 +156,21 @@ Route::screen('attribute/{attribute?}', AttributeEditScreen::class)
         return $trail
             ->push(__('Attributes'), route('platform.attributes.list'))
             ->push(__('Attribute'));
+    });
+
+Route::screen('heroes', HeroListScreen::class)
+    ->name('platform.heroes.list')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail
+            ->push(__('Heroes'));
+    });
+
+Route::screen('hero/{hero}', HeroDetailScreen::class)
+    ->name('platform.heroes.detail')
+    ->breadcrumbs(function (Trail $trail) : Trail
+    {
+        return $trail
+            ->push(__('Heroes'), route('platform.heroes.list'))
+            ->push(__('Hero'));
     });

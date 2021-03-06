@@ -25,13 +25,10 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            ItemMenu::label(__('Users'))
-                ->route('platform.users')
-                ->icon('user')
-                ->title(__('Main')),
             ItemMenu::label(__('Games'))
                 ->route('platform.games.list')
-                ->icon('notebook'),
+                ->icon('notebook')
+                ->title('Content'),
             ItemMenu::label(__('Categories'))
                 ->route('platform.categories.list')
                 ->icon('browser'),
@@ -41,6 +38,13 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label(__('Attributes'))
                 ->route('platform.attributes.list')
                 ->icon('grid'),
+            ItemMenu::label(__('Users'))
+                ->route('platform.users')
+                ->icon('user')
+                ->title(__('User data')),
+            ItemMenu::label(__('Heroes'))
+                ->route('platform.heroes.list')
+                ->icon('friends'),
         ];
     }
 
