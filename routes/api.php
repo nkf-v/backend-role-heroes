@@ -20,18 +20,18 @@ Route::middleware('auth:api')->group(function ()
     Route::prefix('games')->group(function ()
     {
         Route::get('/', [GameApiController::class, 'getList']);
-        Route::get('{game_id}/heroes', [HeroApiController::class, 'getHeroesByGame']);
+        Route::get('{game_id}/heroes', [HeroApiController::class, 'getByGame']);
     });
 
     Route::prefix('heroes')->group(function ()
     {
-        Route::post('create', [HeroApiController::class, 'createHero']);
-        Route::get('{hero_id}', [HeroApiController::class, 'getHero']);
-        Route::put('{hero_id}', [HeroApiController::class, 'updateHero']);
-        Route::delete('{hero_id}', [HeroApiController::class, 'deleteHero']);
+        Route::post('create', [HeroApiController::class, 'create']);
+        Route::get('{hero_id}', [HeroApiController::class, 'get']);
+        Route::put('{hero_id}', [HeroApiController::class, 'updated']);
+        Route::delete('{hero_id}', [HeroApiController::class, 'delete']);
 
-        Route::put('{hero_id}/characteristics/{characteristic_id}/value', [HeroCharacteristicApiController::class, 'updateCharacteristicValue']);
-        Route::put('{hero_id}/attributes/{attribute_id}/value', [HeroAttributeApiController::class, 'updateAttributeValue']);
+        Route::put('{hero_id}/characteristics/{characteristic_id}/value', [HeroCharacteristicApiController::class, 'updateValue']);
+        Route::put('{hero_id}/attributes/{attribute_id}/value', [HeroAttributeApiController::class, 'updateValue']);
     });
 
     Route::get('logout', [AuthApiController::class, 'logout']);

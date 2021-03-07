@@ -24,7 +24,7 @@ class HeroAttributeApiController
         $this->userProvider = $userProvider;
     }
 
-    public function updateAttributeValue(int $heroId, int $attributeId, Request $request) : JsonResponse
+    public function updateValue(int $heroId, int $attributeId, Request $request) : JsonResponse
     {
         /** @var Hero $hero */
         $hero = $this->userProvider->getUser()->heroes()->find($heroId);
@@ -41,7 +41,7 @@ class HeroAttributeApiController
                 ->whereHeroId($heroId)
                 ->whereAttributeId($attributeId)
                 ->first();
-            $attributeValue->value = $request->only('value')['value'];
+            $attributeValue->value = $request->get('value');
             $attributeValue->save();
             DB::commit();
         }

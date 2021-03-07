@@ -26,7 +26,7 @@ class HeroApiController
         $this->userProvider = $userProvider;
     }
 
-    public function getHeroesByGame(int $gameId, LightHeroApiFormatter $formatter) : JsonResponse
+    public function getByGame(int $gameId, LightHeroApiFormatter $formatter) : JsonResponse
     {
         if (Game::find($gameId) === null)
             throw new ServerError(['game_id' => ['invalid_value']]);
@@ -35,7 +35,7 @@ class HeroApiController
         return $this->respondedFormatListContent($heroesQuery->get(), $formatter);
     }
 
-    public function getHero(int $heroId, FullHeroApiFormatter $formatter) : JsonResponse
+    public function get(int $heroId, FullHeroApiFormatter $formatter) : JsonResponse
     {
         $hero = $this->userProvider->getUser()->heroes()->find($heroId);
         if ($hero === null)
@@ -44,7 +44,7 @@ class HeroApiController
         return $this->respondedFormatContent($hero, $formatter);
     }
 
-    public function createHero(HeroRequest $request, FullHeroApiFormatter $formatter) : JsonResponse
+    public function create(HeroRequest $request, FullHeroApiFormatter $formatter) : JsonResponse
     {
         $data = $request->validated();
         $user = $this->userProvider->getUser();
@@ -72,7 +72,7 @@ class HeroApiController
         return $this->respondedFormatContent($hero, $formatter);
     }
 
-    public function deleteHero(int $heroId) : JsonResponse
+    public function delete(int $heroId) : JsonResponse
     {
         $hero = $this->userProvider->getUser()->heroes()->find($heroId);
         if ($hero === null)
@@ -93,7 +93,7 @@ class HeroApiController
         return $this->respondContent(['message' => 'Hero delete']);
     }
 
-    public function updateHero(int $heroId, HeroUpdateRequest $request) : JsonResponse
+    public function updated(int $heroId, HeroUpdateRequest $request) : JsonResponse
     {
         /** @var Hero $hero */
         $hero = $this->userProvider->getUser()->heroes()->find($heroId);

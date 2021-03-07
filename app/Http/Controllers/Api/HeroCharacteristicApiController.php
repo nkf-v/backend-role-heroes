@@ -23,7 +23,7 @@ class HeroCharacteristicApiController
         $this->userProvider = $userProvider;
     }
 
-    public function updateCharacteristicValue(int $heroId, int $characteristicId, HeroCharacteristicUpdateRequest $request) : JsonResponse
+    public function updateValue(int $heroId, int $characteristicId, HeroCharacteristicUpdateRequest $request) : JsonResponse
     {
         $user = $this->userProvider->getUser();
         /** @var Hero $hero */
