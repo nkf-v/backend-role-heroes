@@ -5,7 +5,6 @@ namespace App\Orchid\Layouts\Attribute;
 use App\Enums\AttributeTypeEnum;
 use App\Models\Category;
 use App\Models\Game;
-use DebugBar\DebugBar;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
@@ -22,7 +21,7 @@ class AttributeEditRows extends Rows
         $this->isCreated = $isCreated;
     }
 
-    protected function fields(): array
+    protected function fields() : array
     {
         return [
             DateTimer::make('attribute.created_at')

@@ -33,16 +33,8 @@ class AttributeListTable extends Table
                         ->set('target', '_blank')
                         ->route('platform.categories.edit', $attribute->category);
                 }),
-            TD::make('created_at', 'Created')
-                ->render(function (Attribute $attribute) : string
-                {
-                    return $attribute->created_at->format('d.m.Y');
-                }),
-            TD::make('updated_at', 'Updated')
-                ->render(function (Attribute $attribute) : string
-                {
-                    return $attribute->updated_at->format('d.m.Y');
-                }),
+            TD::make('created_at', 'Created')->date(),
+            TD::make('updated_at', 'Updated')->date(),
         ];
     }
 }

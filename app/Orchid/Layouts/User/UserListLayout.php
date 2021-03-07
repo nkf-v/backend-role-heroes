@@ -24,16 +24,8 @@ class UserListLayout extends Table
                         ->route('platform.users.detail', ['user' => $user]);
                 }),
             TD::make('heroes_count', 'Heroes count'),
-            TD::make('created_at', 'Created')
-                ->render(function (User $user)
-                {
-                    return $user->created_at->format('d.m.Y');
-                }),
-            TD::make('updated_at', 'Updated')
-                ->render(function (User $user)
-                {
-                    return $user->updated_at->format('d.m.Y');
-                }),
+            TD::make('created_at', 'Created')->date(),
+            TD::make('updated_at', 'Updated')->date(),
         ];
     }
 }

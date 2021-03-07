@@ -27,16 +27,8 @@ class CharacteristicListLayout extends Table
                         ->set('target', '_blank')
                         ->route('platform.games.edit', $characteristic->game);
                 }),
-            TD::make('created_at', 'Created')
-                ->render(function (Characteristic $characteristic) : string
-                {
-                    return $characteristic->created_at->format('d.m.Y');
-                }),
-            TD::make('updated_at', 'Updated')
-                ->render(function (Characteristic $characteristic) : string
-                {
-                    return $characteristic->updated_at->format('d.m.Y');
-                }),
+            TD::make('created_at', 'Created')->date(),
+            TD::make('updated_at', 'Updated')->date(),
         ];
     }
 }

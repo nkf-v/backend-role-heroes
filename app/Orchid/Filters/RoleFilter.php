@@ -12,37 +12,24 @@ use Orchid\Screen\Fields\Select;
 
 class RoleFilter extends Filter
 {
-    /**
-     * @var array
-     */
     public $parameters = [
         'role',
     ];
 
-    /**
-     * @return string
-     */
-    public function name(): string
+    public function name() : string
     {
         return __('Roles');
     }
 
-    /**
-     * @param Builder $builder
-     *
-     * @return Builder
-     */
-    public function run(Builder $builder): Builder
+    public function run(Builder $builder) : Builder
     {
-        return $builder->whereHas('roles', function (Builder $query) {
+        return $builder->whereHas('roles', function (Builder $query) : void
+        {
             $query->where('slug', $this->request->get('role'));
         });
     }
 
-    /**
-     * @return Field[]
-     */
-    public function display(): array
+    public function display() : array
     {
         return [
             Select::make('role')
@@ -53,11 +40,8 @@ class RoleFilter extends Filter
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function value(): string
+    public function value() : string
     {
-        return $this->name().': '.Role::where('slug', $this->request->get('role'))->first()->name;
+        return $this->name() . ': ' . Role::where('slug', $this->request->get('role'))->first()->name;
     }
 }

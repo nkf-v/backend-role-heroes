@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\Models\User;
+use Orchid\Screen\TD;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +19,25 @@ class AppServiceProvider extends ServiceProvider
     public function boot() : void
     {
         Dashboard::useModel(User::class, Employee::class);
+
+        $this->createTDMacros();
     }
 
-    // TODO create TD for dates
+    protected function createTDMacros() : void
+    {
+        TD::macro('date', function () : TD
+        {
+            /** @var string $column */
+            $column = $this->column;
+
+            $this->render(function ($datum) use ($column)
+            {
+                /** @var Carbon $value */
+                $value = $datum->$column;
+                return $value->format('d.m.Y');
+            });
+
+            return $this;
+        });
+    }
 }

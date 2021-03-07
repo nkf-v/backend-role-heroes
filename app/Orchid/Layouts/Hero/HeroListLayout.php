@@ -33,16 +33,8 @@ class HeroListLayout extends Table
                         ->set('target', '_blank')
                         ->route('platform.users.detail', $hero->user);
                 }),
-            TD::make('created_at', 'Created')
-                ->render(function (Hero $hero) : string
-                {
-                    return $hero->created_at->format('d.m.Y');
-                }),
-            TD::make('updated_at', 'Updated')
-                ->render(function (Hero $hero) : string
-                {
-                    return $hero->updated_at->format('d.m.Y');
-                }),
+            TD::make('created_at', 'Created')->date(),
+            TD::make('updated_at', 'Updated')->date(),
         ];
     }
 }

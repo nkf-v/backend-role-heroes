@@ -20,16 +20,8 @@ class CategoryListLayout extends Table
                 {
                     return Link::make($category->name)->route('platform.categories.edit', $category);
                 }),
-            TD::make('created_at', 'Created')
-                ->render(function (Category $category) : string
-                {
-                    return $category->created_at->format('d.m.Y');
-                }),
-            TD::make('updated_at', 'Updated')
-                ->render(function (Category $category) : string
-                {
-                    return $category->updated_at->format('d.m.Y');
-                }),
+            TD::make('created_at', 'Created')->date(),
+            TD::make('updated_at', 'Updated')->date(),
         ];
     }
 }

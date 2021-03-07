@@ -22,16 +22,8 @@ class GameListLayout extends Table
                 {
                     return Link::make($game->name)->route('platform.games.edit', $game->id);
                 }),
-            TD::make('created_at', 'Created')
-                ->render(function (Game $game) : string
-                {
-                    return $game->created_at->format('d.m.Y');
-                }),
-            TD::make('updated_at', 'Updated')
-                ->render(function (Game $game) : string
-                {
-                    return $game->updated_at->format('d.m.Y');
-                }),
+            TD::make('created_at', 'Created')->date(),
+            TD::make('updated_at', 'Updated')->date(),
         ];
     }
 }
