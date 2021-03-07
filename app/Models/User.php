@@ -13,12 +13,6 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable, AsSource;
 
     public $timestamps = true;
-    protected $fillable = [
-        'login',
-        'password',
-    ];
-
-    protected $hidden = ['password'];
 
     public function heroes() : HasMany { return $this->hasMany(Hero::class);}
 

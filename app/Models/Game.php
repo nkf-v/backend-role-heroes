@@ -11,10 +11,6 @@ class Game extends Model
     use AsSource;
 
     public $timestamps = true;
-    protected $fillable = [
-        'name',
-        'description',
-    ];
 
     public function heroes() : HasMany { return $this->hasMany(Hero::class); }
     public function characteristics() : HasMany { return $this->hasMany(Characteristic::class); }

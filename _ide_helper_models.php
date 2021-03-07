@@ -195,8 +195,6 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristicValues
  * @property-read int|null $characteristic_values_count
  * @property-read \App\Models\Game $game
- * @property-read array $table_attribute_values
- * @property-read array $table_characteristic_values
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Hero newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Hero newQuery()
