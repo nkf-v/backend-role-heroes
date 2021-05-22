@@ -167,6 +167,8 @@ namespace App\Models{
  * @property-read int|null $characteristics_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Hero[] $heroes
  * @property-read int|null $heroes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttribute[] $structuralAttributes
+ * @property-read int|null $structural_attributes_count
  * @method static \Illuminate\Database\Eloquent\Builder|Game newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Game newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Game query()
@@ -195,6 +197,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristicValues
  * @property-read int|null $characteristic_values_count
  * @property-read \App\Models\Game $game
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttributeValue[] $structuralAttributeValues
+ * @property-read int|null $structural_attribute_values_count
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Hero newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Hero newQuery()
@@ -208,6 +212,120 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Hero whereUserId($value)
  */
 	class Hero extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\StructuralAttribute
+ *
+ * @property int $id
+ * @property bool $multiply
+ * @property string $name
+ * @property string|null $description
+ * @property int $game_id
+ * @property int|null $category_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Category|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructureField[] $fields
+ * @property-read int|null $fields_count
+ * @property-read \App\Models\Game $game
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttributeValue[] $values
+ * @property-read int|null $values_count
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute query()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute whereGameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute whereMultiply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute whereUpdatedAt($value)
+ */
+	class StructuralAttribute extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\StructuralAttributeValue
+ *
+ * @property int $id
+ * @property int $attribute_id
+ * @property string $name
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\StructuralAttribute $attribute
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralFieldValue[] $fieldsValues
+ * @property-read int|null $fields_values_count
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue query()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue whereAttributeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttributeValue whereUpdatedAt($value)
+ */
+	class StructuralAttributeValue extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\StructuralFieldValue
+ *
+ * @property int $id
+ * @property int $attribute_value_id
+ * @property int $attribute_field_id
+ * @property int|null $value_int
+ * @property string|null $value_string
+ * @property bool|null $value_bool
+ * @property float|null $value_double
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\StructureField $field
+ * @property mixed $value
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue query()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereAttributeFieldId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereAttributeValueId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereValueBool($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereValueDouble($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereValueInt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructuralFieldValue whereValueString($value)
+ */
+	class StructuralFieldValue extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\StructureField
+ *
+ * @property int $id
+ * @property int $attribute_id
+ * @property string $name
+ * @property int $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\StructuralAttribute $attribute
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField query()
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField whereAttributeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StructureField whereUpdatedAt($value)
+ */
+	class StructureField extends \Eloquent {}
 }
 
 namespace App\Models{
