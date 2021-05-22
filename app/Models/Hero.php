@@ -18,7 +18,7 @@ class Hero extends Model
         self::created(function (self $hero) : void
         {
             $hero->characteristicValues()->sync($hero->game->characteristics);
-            Attribute::whereGameId($hero->game_id)
+            Attribute::where('game_id', $hero->game_id)
                 ->get()
                 ->each(function (Attribute $attribute) use ($hero) : void
                 {
@@ -41,4 +41,5 @@ class Hero extends Model
     }
 
     public function attributeValues() : HasMany { return $this->hasMany(AttributeValue::class, 'hero_id')->with('attribute'); }
+    public function structuralAttributeValues() : BelongsToMany { return $this->belongsToMany(StructuralAttributeValue::class, 'hero_structural_attribute_values', 'hero_id', 'attribute_value_id')->with('attribute', 'fieldsValues'); }
 }

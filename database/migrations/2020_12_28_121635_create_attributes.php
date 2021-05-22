@@ -58,7 +58,7 @@ class CreateAttributes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attributes_heroes_values');
+        Schema::dropIfExists('heroes_attribute_values');
         Schema::dropIfExists('attributes');
         Schema::dropIfExists('attribute_categories');
     }

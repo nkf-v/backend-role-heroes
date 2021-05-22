@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\AttributeTypeEnum;
+use App\Traits\HasValue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Screen\AsSource;
@@ -10,6 +11,7 @@ use Orchid\Screen\AsSource;
 class AttributeValue extends Model
 {
     use AsSource;
+    use HasValue;
 
     public $table = 'heroes_attribute_values';
     public $timestamps = false;
@@ -17,8 +19,8 @@ class AttributeValue extends Model
 
     public function attribute() : BelongsTo { return $this->belongsTo(Attribute::class); }
 
-    public function getFiledValue() : string { return sprintf('value_%s', AttributeTypeEnum::getValues()[$this->attribute->type_value]); }
-
-    public function getValueAttribute() { return $this->getAttribute($this->getFiledValue()); }
-    public function setValueAttribute($value) : void { $this->setAttribute($this->getFiledValue(), $value); }
+    public function getType(): int
+    {
+        return $this->attribute->type_value;
+    }
 }

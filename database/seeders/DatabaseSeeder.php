@@ -13,16 +13,17 @@ class DatabaseSeeder extends Seeder
     {
         $tableNames = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
         Schema::disableForeignKeyConstraints();
-        foreach ($tableNames as $name) {
+        foreach ($tableNames as $name)
             if ($name !== 'migrations')
                 DB::table($name)->truncate();
-        }
+
         Schema::enableForeignKeyConstraints();
     }
 
     public function run()
     {
-        if (!App::isProduction()) {
+        if (!App::isProduction())
+        {
             $this->clearTables();
             app(FixtureSeeder::class)->run();
         }

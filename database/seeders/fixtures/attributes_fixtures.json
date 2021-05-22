@@ -47,6 +47,190 @@
                 "game_id": 1,
                 "type_value": "int"
             }
+        ],
+        "structure_attributes": [
+            {
+                "multiply": false,
+                "name": "Home world",
+                "game_id": 1,
+                "values": [
+                    {
+                        "name": "Wild world"
+                    },
+                    {
+                        "name": "Hive world"
+                    },
+                    {
+                        "name": "Imperial world"
+                    },
+                    {
+                        "name": "Born in the void"
+                    },
+                    {
+                        "name": "Forge world"
+                    },
+                    {
+                        "name": "Schola Progenium"
+                    },
+                    {
+                        "name": "Noble blood"
+                    },
+                    {
+                        "name": "Purified mind"
+                    }
+                ]
+            },
+            {
+                "multiply": false,
+                "name": "Professional",
+                "game_id": 1,
+                "values": [
+                    {
+                        "name": "Cleric"
+                    },
+                    {
+                        "name": "Bandit"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Traits",
+        "structure_attributes": [
+            {
+                "multiply": true,
+                "name": "Traits",
+                "game_id": 1,
+                "fields": [
+                    {
+                        "type": 0,
+                        "name": "Price",
+                        "slug": "price"
+                    },
+                    {
+                        "type": 1,
+                        "name": "Type",
+                        "slug": "type"
+                    }
+                ],
+                "values": [
+                    {
+                        "name": "Dodge",
+                        "field_values": {
+                            "price": 100,
+                            "type": "Talent"
+                        }
+                    },
+                    {
+                        "name": "Machine control",
+                        "field_values": {
+                            "price": 150,
+                            "type": "Skill"
+                        }
+                    },
+                    {
+                        "name": "Strong physique",
+                        "field_values": {
+                            "price": 100,
+                            "type": "Talent"
+                        }
+                    },
+                    {
+                        "name": "Insight",
+                        "field_values": {
+                            "price": 100,
+                            "type": "Skill"
+                        }
+                    },
+                    {
+                        "name": "Search",
+                        "field_values": {
+                            "price": 100,
+                            "type": "Skill"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Psychosyles",
+        "structure_attributes": [
+            {
+                "multiply": true,
+                "name": "Psychosyles",
+                "game_id": 1,
+                "fields": [
+                    {
+                        "type": 0,
+                        "name": "Threshold",
+                        "slug": "threshold"
+                    },
+                    {
+                        "type": 1,
+                        "name": "Time",
+                        "slug": "time"
+                    },
+                    {
+                        "type": 2,
+                        "name": "Maintenance",
+                        "slug": "maintenance"
+                    },
+                    {
+                        "type": 1,
+                        "name": "Distance",
+                        "slug": "distance"
+                    }
+                ],
+                "values": [
+                    {
+                        "name": "Call Creatures",
+                        "field_values": {
+                            "threshold": 9,
+                            "time": "Full Action",
+                            "maintenance": false,
+                            "distance": "1 km"
+                        }
+                    },
+                    {
+                        "name": "Call Item",
+                        "field_values": {
+                            "threshold": 5,
+                            "time": "Partial Action",
+                            "maintenance": false,
+                            "distance": "unlimited"
+                        }
+                    },
+                    {
+                        "name": "Chameleon",
+                        "field_values": {
+                            "threshold": 7,
+                            "time": "Partial Action",
+                            "maintenance": true,
+                            "distance": "on myself"
+                        }
+                    },
+                    {
+                        "name": "Déjà vu",
+                        "field_values": {
+                            "threshold": 8,
+                            "time": "Partial Action",
+                            "maintenance": false,
+                            "distance": "30 m"
+                        }
+                    },
+                    {
+                        "name": "Distort Vision",
+                        "field_values": {
+                            "threshold": 8,
+                            "time": "Partial Action",
+                            "maintenance": false,
+                            "distance": "on myself"
+                        }
+                    }
+                ]
+            }
         ]
     },
     {

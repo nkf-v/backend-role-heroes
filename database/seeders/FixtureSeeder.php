@@ -5,14 +5,15 @@ namespace Database\Seeders;
 use App\Enums\AttributeTypeEnum;
 use App\Models\Attribute;
 use App\Models\Category;
-use App\Models\AttributeValue;
 use App\Models\Characteristic;
 use App\Models\Employee;
 use App\Models\Game;
-use App\Models\User;
 use App\Models\Hero;
+use App\Models\StructuralAttribute;
+use App\Models\StructuralAttributeValue;
+use App\Models\StructureField;
+use App\Models\User;
 use Faker\Generator;
-use Illuminate\Support\Str;
 use Nkf\General\Utils\ArrayUtils;
 use Nkf\General\Utils\JsonUtils;
 use Nkf\General\Utils\PathUtils;
@@ -24,12 +25,6 @@ class FixtureSeeder
     public function __construct()
     {
         $this->faker = app(Generator::class);
-    }
-
-    // TODO Remove method
-    protected function getValueFromDatum($data, $key, callable $getDefaultValue)
-    {
-        return (($data[$key] ?? null) === null) ? $getDefaultValue() : $data[$key];
     }
 
     public function run() : void
@@ -65,8 +60,8 @@ class FixtureSeeder
         foreach ($gameData as $gameDatum)
         {
             $game = new Game();
-            $game->name = $this->getValueFromDatum($gameDatum, 'name', function () { return $this->faker->sentence(2); });
-            $game->description = $this->getValueFromDatum($gameDatum, 'description', function () { return $this->faker->text; });
+            $game->name = $gameDatum['name'] ?? $this->faker->sentence(2);
+            $game->description = $gameDatum['description'] ?? $this->faker->text;
             $game->save();
             $games[] = $game;
         }
@@ -75,9 +70,9 @@ class FixtureSeeder
         foreach ($characteristicData as $characteristicDatum)
         {
             $characteristic = new Characteristic();
-            $characteristic->name = $this->getValueFromDatum($characteristicDatum, 'name', function () { return $this->faker->text(10); });
-            $characteristic->description = $this->getValueFromDatum($characteristicDatum, 'description', function () { return $this->faker->text; });
-            $characteristic->game_id = $this->getValueFromDatum($characteristicDatum, 'game_id', function () use ($games) { return $this->faker->randomElement($games)->id; });
+            $characteristic->name = $characteristicDatum['name'] ?? $this->faker->text(10);
+            $characteristic->description = $characteristicDatum['description'] ?? $this->faker->text;
+            $characteristic->game_id = $characteristicDatum['game_id'] ?? ArrayUtils::randomValue($games)->id;
             $characteristic->save();
         }
 
@@ -85,19 +80,62 @@ class FixtureSeeder
         foreach ($categoryData as $categoryDatum)
         {
             $category = new Category();
-            $category->name = $this->getValueFromDatum($categoryDatum, 'name', function () { return $this->faker->sentence(random_int(1, 2)); });
+            $category->name = $categoryDatum['name'] ?? $this->faker->sentence(random_int(1, 2));
             $category->save();
 
             foreach ($categoryDatum['attributes'] ?? [] as $attributeDatum)
             {
                 $attribute = new Attribute();
-                $attribute->name = $this->getValueFromDatum($attributeDatum, 'name', function () { return $this->faker->sentence(random_int(1, 3)); });
-                $attribute->description = $this->getValueFromDatum($attributeDatum, 'description', function () { return $this->faker->boolean ? null : $this->faker->text; });
-                $attribute->game_id = $this->getValueFromDatum($attributeDatum, 'game_id', function () use ($games) { return $this->faker->randomElement($games); });
+                $attribute->name = $attributeDatum['name'] ?? $this->faker->sentence(random_int(1, 3));
+                if (array_key_exists('description', $attributeDatum))
+                    $attribute->description = $attributeDatum['description'];
+                else if ($this->faker->boolean)
+                    $attribute->description = $this->faker->text;
+                $attribute->game_id = $attributeDatum['game_id'] ?? $this->faker->randomElement($games);
                 $attribute->type_value = AttributeTypeEnum::getVariables()[$attributeDatum['type_value'] ?? 'string'];
                 $attribute->category_id = $category->id;
                 $attribute->save();
                 $attributes[] = $attribute;
+            }
+
+            foreach ($categoryDatum['structure_attributes'] ?? [] as $attributeDatum)
+            {
+                $attribute = new StructuralAttribute();
+                $attribute->name = $attributeDatum['name'];
+                $attribute->description = $this->faker->boolean ? null : $this->faker->sentence;
+                $attribute->multiply = $attributeDatum['multiply'];
+                $attribute->game_id = $attributeDatum['game_id'];
+                $attribute->category_id = $category->id;
+                $attribute->save();
+
+                $fields = [];
+                foreach ($attributeDatum['fields'] ?? [] as $structureColumn)
+                {
+                    $field = new StructureField();
+                    $field->attribute_id = $attribute->id;
+                    $field->name = $structureColumn['name'];
+                    $field->type = $structureColumn['type'];
+                    $field->save();
+                    $fields[$structureColumn['slug']] = $field;
+                }
+
+                foreach ($attributeDatum['values'] ?? [] as $attributeValueDatum)
+                {
+                    $attributeValue = new StructuralAttributeValue();
+                    $attributeValue->name = $attributeValueDatum['name'];
+                    $attributeValue->description = $this->faker->boolean ? null : $this->faker->sentence;
+                    $attributeValue->attribute_id = $attribute->id;
+                    $attributeValue->save();
+
+                    $fieldValues = $attributeValueDatum['field_values'] ?? [];
+                    $valuesFields = $attributeValue->fieldsValues->keyBy('attribute_field_id');
+                    foreach ($fieldValues as $slugField => $fieldValue)
+                    {
+                        $valueField = $valuesFields[$fields[$slugField]->id];
+                        $valueField->value = $valueField->castValue($fieldValue);
+                        $valueField->save();
+                    }
+                }
             }
         }
 
@@ -131,9 +169,14 @@ class FixtureSeeder
                         $columnValue = sprintf('value_%s', AttributeTypeEnum::getValues()[$attribute->type_value] ?? 'string');
                         $hero->attributeValues()
                             ->where('attribute_id', $attribute->id)
-                            ->update([
-                                $columnValue => $value,
-                            ]);
+                            ->update([$columnValue => $value]);
+                    }
+
+                    /** @var StructuralAttribute $attribute */
+                    foreach ($hero->game->structuralAttributes as $attribute)
+                    {
+                        $heroAttributeValues = ArrayUtils::toArray($attribute->values()->pluck('id'));
+                        $hero->structuralAttributeValues()->syncWithoutDetaching($attribute->multiply ? ArrayUtils::randomValues($heroAttributeValues) : [ArrayUtils::randomValue($heroAttributeValues)]);
                     }
                 }
             }
