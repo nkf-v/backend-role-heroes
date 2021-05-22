@@ -38,8 +38,11 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label(__('Attributes'))
                 ->route('platform.attributes.list')
                 ->icon('grid'),
+            ItemMenu::label(__('Structural attributes'))
+                ->route('platform.structural_attributes.list')
+                ->icon('grid'),
             ItemMenu::label(__('Users'))
-                ->route('platform.users')
+                ->route('platform.users.list')
                 ->icon('user')
                 ->title(__('User data')),
             ItemMenu::label(__('Heroes'))

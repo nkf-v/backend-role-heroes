@@ -15,11 +15,6 @@ class HeroAttributeValuesTable extends Table
     {
         return [
             TD::make('attribute.name', 'Name'),
-            TD::make('attribute.type_value', 'Type value')
-                ->render(function (AttributeValue $attributeValue) : string
-                {
-                    return AttributeTypeEnum::getLabelValue($attributeValue->attribute->type_value);
-                }),
             TD::make('value', 'Value'),
             // TODO button with desc or name make as link
         ];

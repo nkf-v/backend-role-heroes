@@ -16,8 +16,12 @@ class HeroDetailLayout extends Rows
     protected function fields() : array
     {
         return [
-            DateTimer::make('hero.created_at')->readonly(),
-            DateTimer::make('hero.updated_at')->readonly(),
+            DateTimer::make('hero.created_at')
+                ->title('Created')
+                ->disabled(),
+            DateTimer::make('hero.updated_at')
+                ->title('Updated')
+                ->disabled(),
             Relation::make('hero.game_id')
                 ->title('Game')
                 ->fromModel(Game::class, 'name', 'id')
