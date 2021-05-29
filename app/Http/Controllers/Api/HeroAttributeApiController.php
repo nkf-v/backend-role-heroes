@@ -5,25 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Hero;
-use App\Providers\UserProvider;
 use DB;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Nkf\Laravel\Classes\Exceptions\ServerError;
-use Nkf\Laravel\Traits\ApiController;
 
-class HeroAttributeApiController
+class HeroAttributeApiController extends ApiController
 {
-    use ApiController;
-
-    protected $userProvider;
-
-    public function __construct(UserProvider $userProvider)
-    {
-        $this->userProvider = $userProvider;
-    }
-
     public function updateValue(int $heroId, int $attributeId, Request $request) : JsonResponse
     {
         /** @var Hero $hero */

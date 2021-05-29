@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use Auth;
 
-class UserProvider
+final class UserProvider
 {
     public function getUser() : User
     {

@@ -5,29 +5,27 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\HeroCharacteristicUpdateRequest;
 use App\Models\Characteristic;
 use App\Models\Hero;
+use App\Providers\HeroProvider;
 use App\Providers\UserProvider;
 use DB;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Nkf\Laravel\Classes\Exceptions\ServerError;
-use Nkf\Laravel\Traits\ApiController;
 
-class HeroCharacteristicApiController
+class HeroCharacteristicApiController extends ApiController
 {
-    use ApiController;
+    protected HeroProvider $heroProvider;
 
-    protected $userProvider;
-
-    public function __construct(UserProvider $userProvider)
+    public function __construct(UserProvider $userProvider, HeroProvider $heroProvider)
     {
-        $this->userProvider = $userProvider;
+        parent::__construct($userProvider);
+
+        $this->heroProvider = $heroProvider;
     }
 
     public function updateValue(int $heroId, int $characteristicId, HeroCharacteristicUpdateRequest $request) : JsonResponse
     {
-        $user = $this->userProvider->getUser();
-        /** @var Hero $hero */
-        $hero = $user->heroes()->find($heroId);
+        $hero = $this->heroProvider->getOptionalHeroById($heroId);
         if ($hero === null)
             throw new ServerError(['hero_id' => ['invalid_value']]);
 

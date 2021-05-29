@@ -5,23 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use App\Providers\UserProvider;
 use Auth;
 use Illuminate\Http\JsonResponse;
 use Nkf\Laravel\Classes\Exceptions\ServerError;
-use Nkf\Laravel\Traits\ApiController;
 
-class AuthApiController
+class AuthApiController extends ApiController
 {
-    use ApiController;
-
-    private $userProvider;
-
-    public function __construct(UserProvider $userProvider)
-    {
-        $this->userProvider = $userProvider;
-    }
-
     public function register(UserRequest $request) : JsonResponse
     {
         $newUser = $request->validated();
@@ -39,7 +28,7 @@ class AuthApiController
     public function login(LoginRequest $request) : JsonResponse
     {
         $credentials = $request->validated();
-        $token = auth('api')->attempt($credentials);
+        $token = Auth::guard('api')->attempt($credentials);
 
         if (!$token)
             throw new ServerError(['login' => ['invalid_login_password']]);

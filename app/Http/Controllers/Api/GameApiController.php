@@ -5,12 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Formatters\Api\GameApiFormatter;
 use App\Models\Game;
 use Illuminate\Http\JsonResponse;
-use Nkf\Laravel\Traits\ApiController;
 
-class GameApiController
+class GameApiController extends ApiController
 {
-    use ApiController;
-
     public function getList(GameApiFormatter $formatter) : JsonResponse
     {
         return $this->respondedFormatListContent(Game::get(), $formatter);

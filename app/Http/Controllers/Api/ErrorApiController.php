@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
-use Nkf\Laravel\Traits\ApiController;
 
-class ErrorApiController
+class ErrorApiController extends ApiController
 {
-    use ApiController;
-
     public function error() : JsonResponse
     {
         return $this->respondContent(['error']);

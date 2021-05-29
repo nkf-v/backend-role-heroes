@@ -8,24 +8,13 @@ use App\Http\Requests\HeroRequest;
 use App\Http\Requests\HeroUpdateRequest;
 use App\Models\Game;
 use App\Models\Hero;
-use App\Providers\UserProvider;
 use DB;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Nkf\Laravel\Classes\Exceptions\ServerError;
-use Nkf\Laravel\Traits\ApiController;
 
-class HeroApiController
+class HeroApiController extends ApiController
 {
-    use ApiController;
-
-    protected $userProvider;
-
-    public function __construct(UserProvider $userProvider)
-    {
-        $this->userProvider = $userProvider;
-    }
-
     public function getByGame(int $gameId, LightHeroApiFormatter $formatter) : JsonResponse
     {
         if (Game::find($gameId) === null)
