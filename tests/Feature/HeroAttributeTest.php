@@ -27,7 +27,6 @@ class HeroAttributeTest extends ApiTestCase
             case AttributeTypeEnum::INT: $value = random_int(0, 100); break;
             case AttributeTypeEnum::DOUBLE: $value = 10.12; break;
             case AttributeTypeEnum::BOOL: $value = (boolean)random_int(0, 1); break;
-            default: $value = 'test values';
         }
 
         $this->login($user)
