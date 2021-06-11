@@ -42,4 +42,5 @@ class Hero extends Model
 
     public function attributeValues() : HasMany { return $this->hasMany(AttributeValue::class, 'hero_id')->with('attribute'); }
     public function structuralAttributeValues() : BelongsToMany { return $this->belongsToMany(StructuralAttributeValue::class, 'hero_structural_attribute_values', 'hero_id', 'attribute_value_id')->with('attribute', 'fieldsValues')->withTimestamps(); }
+    public function items() : BelongsToMany { return $this->belongsToMany(Item::class, 'heroes_items')->withTimestamps(); }
 }

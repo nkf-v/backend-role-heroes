@@ -1,0 +1,189 @@
+[
+    {
+        "game_id": 1,
+        "types": [
+            {
+                "type": 1,
+                "fields": [
+                    {
+                        "name": "Class",
+                        "value_type": 1,
+                        "slug": "class"
+                    },
+                    {
+                        "name": "Distance (m)",
+                        "value_type": 0,
+                        "slug": "distance"
+                    },
+                    {
+                        "name": "Damage",
+                        "value_type": 1,
+                        "slug": "damage"
+                    },
+                    {
+                        "name": "Armorpiercing",
+                        "value_type": 0,
+                        "slug": "armor"
+                    }
+                ],
+                "items": [
+                    {
+                        "name": "pistol 1",
+                        "fields": {
+                            "class": "Pistol",
+                            "distance": 20,
+                            "damage": "1d10+1",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "pistol 2",
+                        "fields": {
+                            "class": "Pistol",
+                            "distance": 35,
+                            "damage": "1d10+2",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "pistol 3",
+                        "fields": {
+                            "class": "Pistol",
+                            "distance": 20,
+                            "damage": "1d10",
+                            "armor": 4
+                        }
+                    },
+                    {
+                        "name": "Rifle 1",
+                        "fields": {
+                            "class": "Rifle",
+                            "distance": 100,
+                            "damage": "1d10+5",
+                            "armor": 2
+                        }
+                    },
+                    {
+                        "name": "Rifle 2",
+                        "fields": {
+                            "class": "Rifle",
+                            "distance": 300,
+                            "damage": "1d10+5",
+                            "armor": 0
+                        }
+                    },
+                    {
+                        "name": "Rifle 3",
+                        "fields": {
+                            "class": "Rifle",
+                            "distance": 150,
+                            "damage": "1d10+6",
+                            "armor": 5
+                        }
+                    }
+                ]
+            },
+            {
+                "type": 2,
+                "fields": [
+                    {
+                        "name": "Class",
+                        "value_type": 1,
+                        "slug": "class"
+                    },
+                    {
+                        "name": "Armor",
+                        "value_type": 0,
+                        "slug": "armor"
+                    }
+                ],
+                "items": [
+                    {
+                        "name": "Head 1",
+                        "fields": {
+                            "class": "primitive",
+                            "armor": 2
+                        }
+                    },
+                    {
+                        "name": "Body 1",
+                        "fields": {
+                            "class": "primitive",
+                            "armor": 3
+                        }
+                    },
+                    {
+                        "name": "Left hand 1",
+                        "fields": {
+                            "class": "primitive",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Right hand 1",
+                        "fields": {
+                            "class": "primitive",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Right foot 1",
+                        "fields": {
+                            "class": "primitive",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Left foot 1",
+                        "fields": {
+                            "class": "primitive",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Head 1",
+                        "fields": {
+                            "class": "leather",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Body 1",
+                        "fields": {
+                            "class": "leather",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Left hand 1",
+                        "fields": {
+                            "class": "leather",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Right hand 1",
+                        "fields": {
+                            "class": "leather",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Right foot 1",
+                        "fields": {
+                            "class": "leather",
+                            "armor": 1
+                        }
+                    },
+                    {
+                        "name": "Left foot 1",
+                        "fields": {
+                            "class": "leather",
+                            "armor": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

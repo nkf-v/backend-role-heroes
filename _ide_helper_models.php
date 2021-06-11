@@ -167,6 +167,8 @@ namespace App\Models{
  * @property-read int|null $characteristics_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Hero[] $heroes
  * @property-read int|null $heroes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Item[] $items
+ * @property-read int|null $items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttribute[] $structuralAttributes
  * @property-read int|null $structural_attributes_count
  * @method static \Illuminate\Database\Eloquent\Builder|Game newModelQuery()
@@ -197,6 +199,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristicValues
  * @property-read int|null $characteristic_values_count
  * @property-read \App\Models\Game $game
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Item[] $items
+ * @property-read int|null $items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttributeValue[] $structuralAttributeValues
  * @property-read int|null $structural_attribute_values_count
  * @property-read \App\Models\User $user
@@ -212,6 +216,94 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Hero whereUserId($value)
  */
 	class Hero extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Item
+ *
+ * @property int $id
+ * @property int $game_id
+ * @property int $type
+ * @property string $name
+ * @property string|null $description
+ * @property int|null $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemFieldValue[] $fieldValues
+ * @property-read int|null $field_values_count
+ * @property-read \App\Models\Game $game
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Item newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Item newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Item query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Item whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Item whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Item whereGameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Item whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Item whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Item whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Item whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Item whereUserId($value)
+ */
+	class Item extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ItemField
+ *
+ * @property int $id
+ * @property int $game_id
+ * @property int $item_type
+ * @property string $name
+ * @property int $value_type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Game $game
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField whereGameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField whereItemType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemField whereValueType($value)
+ */
+	class ItemField extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ItemFieldValue
+ *
+ * @property int $id
+ * @property int $item_id
+ * @property int $field_id
+ * @property int|null $value_int
+ * @property string|null $value_string
+ * @property bool|null $value_bool
+ * @property float|null $value_double
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ItemField $field
+ * @property mixed $value
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereFieldId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereValueBool($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereValueDouble($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereValueInt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ItemFieldValue whereValueString($value)
+ */
+	class ItemFieldValue extends \Eloquent {}
 }
 
 namespace App\Models{

@@ -3,12 +3,15 @@
 namespace Database\Seeders;
 
 use App\Enums\AttributeTypeEnum;
+use App\Enums\ItemTypeEnum;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Characteristic;
 use App\Models\Employee;
 use App\Models\Game;
 use App\Models\Hero;
+use App\Models\Item;
+use App\Models\ItemField;
 use App\Models\StructuralAttribute;
 use App\Models\StructuralAttributeValue;
 use App\Models\StructureField;
@@ -108,7 +111,7 @@ class FixtureSeeder
                 $attribute->category_id = $category->id;
                 $attribute->save();
 
-                $fields = [];
+                $fieldData = [];
                 foreach ($attributeDatum['fields'] ?? [] as $structureColumn)
                 {
                     $field = new StructureField();
@@ -116,7 +119,7 @@ class FixtureSeeder
                     $field->name = $structureColumn['name'];
                     $field->type = $structureColumn['type'];
                     $field->save();
-                    $fields[$structureColumn['slug']] = $field;
+                    $fieldData[$structureColumn['slug']] = $field;
                 }
 
                 foreach ($attributeDatum['values'] ?? [] as $attributeValueDatum)
@@ -131,9 +134,51 @@ class FixtureSeeder
                     $valuesFields = $attributeValue->fieldsValues->keyBy('attribute_field_id');
                     foreach ($fieldValues as $slugField => $fieldValue)
                     {
-                        $valueField = $valuesFields[$fields[$slugField]->id];
+                        $valueField = $valuesFields[$fieldData[$slugField]->id];
                         $valueField->value = $valueField->castValue($fieldValue);
                         $valueField->save();
+                    }
+                }
+            }
+        }
+
+        $gamesItems = JsonUtils::decodeFile(PathUtils::join(__DIR__, 'fixtures', 'items_fixtures.json'));
+        $gameItemIds = [];
+        foreach ($gamesItems as $gameItems)
+        {
+            $gameId = $gameItems['game_id'] ?? $this->faker->randomElement($games)->id;
+            $typesItems = $gameItems['types'] ?? [];
+            foreach ($typesItems as $typeItems)
+            {
+                $itemType = $typeItems['type'] ?? $this->faker->randomElement([ItemTypeEnum::WEAPON, ItemTypeEnum::ARMOR]);
+                $fieldData = $typeItems['fields'] ?? [];
+                $mapFieldIdToSlug = [];
+                foreach ($fieldData as $fieldDatum)
+                {
+                    $field = new ItemField();
+                    $field->game_id = $gameId;
+                    $field->item_type = $itemType;
+                    $field->name = $fieldDatum['name'];
+                    $field->value_type = $fieldDatum['value_type'];
+                    $field->save();
+                    $mapFieldIdToSlug[$field->id] = $fieldDatum['slug'];
+                }
+
+                $itemData = $typeItems['items'] ?? [];
+                foreach ($itemData as $itemDatum)
+                {
+                    $item = new Item();
+                    $item->game_id = $gameId;
+                    $item->type = $itemType;
+                    $item->name = $itemDatum['name'];
+                    $item->description = $this->faker->boolean ? null : $this->faker->text;
+                    $item->save();
+                    $gameItemIds[$gameId][] = $item->id;
+
+                    foreach ($item->fieldValues as $fieldValue)
+                    {
+                        $fieldValue->value = $fieldValue->castValue($itemDatum['fields'][$mapFieldIdToSlug[$fieldValue->field_id]]);
+                        $fieldValue->save();
                     }
                 }
             }
@@ -178,6 +223,13 @@ class FixtureSeeder
                         $heroAttributeValues = ArrayUtils::toArray($attribute->values()->pluck('id'));
                         $hero->structuralAttributeValues()->syncWithoutDetaching($attribute->multiply ? ArrayUtils::randomValues($heroAttributeValues) : [ArrayUtils::randomValue($heroAttributeValues)]);
                     }
+
+                    $itemIds = [];
+                    foreach ($hero->game->items as $item)
+                        if ($this->faker->boolean)
+                            $itemIds[] = $item->id;
+
+                    $hero->items()->sync($itemIds);
                 }
             }
         }

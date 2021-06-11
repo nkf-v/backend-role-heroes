@@ -16,4 +16,5 @@ class Game extends Model
     public function characteristics() : HasMany { return $this->hasMany(Characteristic::class); }
     public function attributeModels() : HasMany { return $this->hasMany(Attribute::class); }
     public function structuralAttributes() : HasMany { return $this->hasMany(StructuralAttribute::class); }
+    public function items() : HasMany { return $this->hasMany(Item::class); }
 }
