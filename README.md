@@ -2,7 +2,7 @@
 
 Backend implementation for role heroes app
 
-## Requirments
+## Requirements
 
 - PostgreSQL v13.0
 - PHP v7.4.11
@@ -18,4 +18,4 @@ Backend implementation for role heroes app
 
 ## Authors project
 
-[Vasiliy Nikifrovo](https://github.com/kaktusv6)
+[Vasiliy Nikiforov](https://github.com/kaktusv6)
