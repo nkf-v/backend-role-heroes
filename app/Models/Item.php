@@ -14,11 +14,11 @@ class Item extends Model
     {
         parent::boot();
 
-        self::created(function (self $item) : void
+        self::created(function (Item $item) : void
         {
             ItemField::query()
                 ->where('game_id', $item->game_id)
-                ->where('item_type', $item->attribute_id)
+                ->where('item_type', $item->type)
                 ->get()
                 ->each(function (ItemField $field) use ($item) : void
                 {
