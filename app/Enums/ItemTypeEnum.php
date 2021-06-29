@@ -2,7 +2,9 @@
 
 namespace App\Enums;
 
-class ItemTypeEnum
+use Nkf\Laravel\Classes\LaravelEnum;
+
+class ItemTypeEnum extends LaravelEnum
 {
     public const ITEM = 0;
     public const WEAPON = 1;
