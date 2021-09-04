@@ -21,6 +21,7 @@ class StructuralAttributeFormatter extends BaseFormatter
             $valueFormatter) : array
         {
             return [
+                'id' => $attribute->id,
                 'name' => $attribute->name,
                 'description' => $attribute->description,
                 'multiply' => $attribute->multiply,
