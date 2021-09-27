@@ -32,7 +32,7 @@ abstract class ApiTestCase extends BaseTestCase
     protected function login(?User $user = null)
     {
         $user = ($user === null) ? $this->getRandomUser() : $user;
-        $response = $this->call('GET', '/api/auth/login', [
+        $response = $this->call('POST', '/api/auth/login', [
             'login' => $user->login,
             'password' => 'qweqwe',
         ])->assertStatus(200)->json();

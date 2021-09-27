@@ -9,7 +9,7 @@ class AuthTest extends ApiTestCase
 {
     public function testLogin() : void
     {
-        $this->call('GET', '/api/auth/login', ['login' => 'test.1', 'password' => 'qweqwe'])
+        $this->call('POST', '/api/auth/login', ['login' => 'test.1', 'password' => 'qweqwe'])
             ->assertSuccessful()
             ->assertJsonStructure([
                 'access_token',
@@ -26,7 +26,7 @@ class AuthTest extends ApiTestCase
             'password_confirmation' => 'qweqwe',
         ];
 
-        $this->call('GET', '/api/auth/register', $newUser)
+        $this->call('POST', '/api/auth/register', $newUser)
             ->assertSuccessful()
             ->assertJsonStructure([
                 'access_token',
