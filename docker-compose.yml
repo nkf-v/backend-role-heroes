@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    nginx:
+        image: nginx:latest
+        ports:
+            - 2609:80
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/confs:/etc/nginx/conf.d
+        links:
+            - app
+    app:
+        build:
+            context: ./docker/php
+            dockerfile: Dockerfile
+        environment:
+            - DB_HOST=role_heroes_database
+        volumes:
+            - ./:/var/www
+            - ./docker/php/confs/php.ini:/usr/local/etc/php/php.ini
+        depends_on:
+            - database
+    database:
+        image: postgres:latest
+        container_name: role_heroes_database
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_DB=${DB_DATABASE}
+            - POSTGRES_USER=${DB_USERNAME}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
