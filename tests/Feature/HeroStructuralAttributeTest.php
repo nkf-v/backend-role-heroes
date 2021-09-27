@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-
 use App\Models\Game;
 use App\Models\Hero;
 use App\Models\StructuralAttribute;
 use Nkf\General\Utils\ArrayUtils;
 use Tests\ApiTestCase;
+use Illuminate\Http\Response as ResponseStatuses;
 
 class HeroStructuralAttributeTest extends ApiTestCase
 {
@@ -43,5 +43,36 @@ class HeroStructuralAttributeTest extends ApiTestCase
         $this->assertResponseError(['hero_id' => ['invalid_value']], $this->put("/api/heroes/{$hero->id}/attributes/{$attribute->id}/value", ['value_ids' => $valueIds]));
 
         // TODO: add assert for other games
+    }
+
+    public function dataProviderAttributeIds() : array
+    {
+        return [
+            'get attribute values without fields' => [1],
+            'get attribute values with fields' => [3],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderAttributeIds
+     */
+    public function testGetValues(int $attributeId) : void
+    {
+        $this->assertNotNull(StructuralAttribute::find($attributeId));
+
+        $user = $this->getRandomUser();
+
+        $this->login($user)
+            ->get("api/structural_attributes/{$attributeId}/values")
+            ->assertSuccessful();
+    }
+
+    public function testFailGetValues() : void
+    {
+        $user = $this->getRandomUser();
+
+        $this->login($user)
+            ->get("api/structural_attributes/1234/values")
+            ->assertStatus(ResponseStatuses::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
