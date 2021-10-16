@@ -8,8 +8,8 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/nginx/confs:/etc/nginx/conf.d
-        links:
-            - app
+        networks:
+            - default
     app:
         build:
             context: ./docker/php
@@ -19,14 +19,16 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/php/confs/php.ini:/usr/local/etc/php/php.ini
-        depends_on:
-            - database
+        networks:
+            - default
     database:
         image: postgres:latest
         container_name: role_heroes_database
-        ports:
-            - 5432:5432
         environment:
             - POSTGRES_DB=${DB_DATABASE}
             - POSTGRES_USER=${DB_USERNAME}
             - POSTGRES_PASSWORD=${DB_PASSWORD}
+        networks:
+            - default
+networks:
+    default:
