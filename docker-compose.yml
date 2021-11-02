@@ -15,7 +15,9 @@ services:
             context: ./docker/php
             dockerfile: Dockerfile
         environment:
+            - DB_CONNECTION=pgsql
             - DB_HOST=role_heroes_database
+            - DB_PORT=5432
         volumes:
             - ./:/var/www
             - ./docker/php/confs/php.ini:/usr/local/etc/php/php.ini
