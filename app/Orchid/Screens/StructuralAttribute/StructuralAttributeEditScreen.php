@@ -20,7 +20,7 @@ use Orchid\Support\Facades\Layout;
 class StructuralAttributeEditScreen extends Screen
 {
     public $name = 'Structural attribute';
-    protected $exists = false;
+    protected bool $exists = false;
     protected ?int $attributeId = null;
     protected bool $existFields = false;
 
@@ -73,9 +73,7 @@ class StructuralAttributeEditScreen extends Screen
 
     public function layout() : array
     {
-        $layouts = [
-            new StructuralAttributeEditRows(!$this->exists),
-        ];
+        $layouts = [new StructuralAttributeEditRows(!$this->exists)];
 
         if ($this->exists)
         {
@@ -130,7 +128,10 @@ class StructuralAttributeEditScreen extends Screen
         $attributeData = $request->get('attribute');
         $attribute->game_id = $attributeData['game_id'];
         $attribute->category_id = $attributeData['category_id'] ?? null;
-        $attribute->multiply = $attributeData['multiply'];
+
+        if (array_key_exists('multiply', $attributeData))
+            $attribute->multiply = $attributeData['multiply'];
+
         $attribute->name = $attributeData['name'];
         $attribute->description = $attributeData['description'] ?? null;
         $attribute->save();
