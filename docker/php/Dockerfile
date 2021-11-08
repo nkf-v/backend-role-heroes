@@ -9,6 +9,8 @@ ADD ./scripts/deploy.sh /tmp/
 
 RUN chmod +x /tmp/deploy.sh
 
+RUN chown -R www-data:www-data /var/www
+
 WORKDIR /var/www
 
 ENTRYPOINT bash -c /tmp/deploy.sh
