@@ -26,13 +26,8 @@ class FullHeroApiFormatter extends BaseFormatter
                 $valuesByStructuralAttribute[$value->attribute_id][] = $value;
 
             $structuralAttributes = [];
-            foreach ($valuesByStructuralAttribute as $values)
-            {
-                /** @var StructuralAttributeValue $firstValue */
-                $firstValue = ArrayUtils::first($values);
-                $attribute = $firstValue->attribute;
-                $structuralAttributes[] = $structuralAttributeFormatter->format($attribute, ['selectedValues' => $values]);
-            }
+            foreach ($hero->game->structuralAttributes as $attribute)
+                $structuralAttributes[] = $structuralAttributeFormatter->format($attribute, ['selectedValues' => $valuesByStructuralAttribute[$attribute->id] ?? []]);
 
             return [
                 'id' => $hero->id,
