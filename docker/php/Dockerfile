@@ -5,11 +5,11 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN chmod +x /usr/local/bin/install-php-extensions
 RUN install-php-extensions bcmath mcrypt pgsql pdo_pgsql gd xdebug @composer
 
-COPY scripts/deploy.sh /tmp/deploy.sh
+ADD ./scripts/deploy.sh /tmp/
 
 RUN chmod +x /tmp/deploy.sh
 
 WORKDIR /var/www
 
-ENTRYPOINT /tmp/deploy.sh
+ENTRYPOINT bash -c /tmp/deploy.sh
 CMD []
