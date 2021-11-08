@@ -25,7 +25,7 @@ class HeroStructuralAttributeTest extends ApiTestCase
         if ($attribute->multiply)
             $valueIds = ArrayUtils::randomValues($valueIds);
         else
-            $valueIds = ArrayUtils::randomValue($valueIds);
+            $valueIds = [ArrayUtils::randomValue($valueIds)];
 
         $this->login($user)
             ->put("api/heroes/{$hero->id}/structural_attributes/{$attribute->id}/value", ['value_ids' => $valueIds])
