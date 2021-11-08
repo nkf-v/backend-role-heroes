@@ -26,6 +26,8 @@ services:
     database:
         image: postgres:latest
         container_name: role_heroes_database
+        ports:
+            - 5432:5432
         environment:
             - POSTGRES_DB=${DB_DATABASE}
             - POSTGRES_USER=${DB_USERNAME}
