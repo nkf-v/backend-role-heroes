@@ -71,7 +71,7 @@ class CreateInventory extends Migration
     public function down()
     {
         Schema::dropIfExists('heroes_items');
-        Schema::dropIfExists('item_field_value');
+        Schema::dropIfExists('item_field_values');
         Schema::dropIfExists('item_fields');
         Schema::dropIfExists('items');
     }
