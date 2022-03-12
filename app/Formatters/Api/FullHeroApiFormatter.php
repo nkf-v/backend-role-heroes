@@ -12,13 +12,15 @@ class FullHeroApiFormatter extends BaseFormatter
     public function __construct(
         HeroCharacteristicApiFormatter $characteristicFormatter,
         HeroAttributeValueApiFormatter $attributeValueFormatter,
-        StructuralAttributeFormatter $structuralAttributeFormatter
+        StructuralAttributeFormatter $structuralAttributeFormatter,
+        ItemFormatter $itemFormatter
     )
     {
         $this->setFormatter(function (Hero $hero) use (
             $characteristicFormatter,
             $attributeValueFormatter,
-            $structuralAttributeFormatter
+            $structuralAttributeFormatter,
+            $itemFormatter
         ) : array
         {
             $valuesByStructuralAttribute = [];
@@ -37,6 +39,7 @@ class FullHeroApiFormatter extends BaseFormatter
                 'characteristics' => $characteristicFormatter->formatList($hero->characteristicValues),
                 'attributes' => $attributeValueFormatter->formatList($hero->attributeValues),
                 'structural_attributes' => $structuralAttributes,
+                'items' => $itemFormatter->formatList($hero->items),
             ];
         });
     }
