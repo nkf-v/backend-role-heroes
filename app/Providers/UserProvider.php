@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\User;
+use App\Modules\Users\Models\User;
 use Auth;
 
 final class UserProvider

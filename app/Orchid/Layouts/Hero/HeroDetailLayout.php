@@ -23,7 +23,7 @@ class HeroDetailLayout extends Rows
                 ->title('Updated')
                 ->disabled(),
             Relation::make('hero.game_id')
-                ->title('Game')
+                ->title('Games')
                 ->fromModel(Game::class, 'name', 'id')
                 ->disabled(),
             Relation::make('hero.user_id')

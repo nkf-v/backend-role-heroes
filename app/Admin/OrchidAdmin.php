@@ -13,7 +13,7 @@ abstract class OrchidAdmin implements AdminBase
     protected string $mainRouteItem = 'item';
 
     protected string $listScreen = Screen::class;
-    protected string $detailScreen = Screen::class;
+    protected string $editScreen = Screen::class;
 
     protected string $model = Model::class;
 
@@ -26,7 +26,7 @@ abstract class OrchidAdmin implements AdminBase
                 return $trail->push(__($this->mainRoute));
             });
 
-        Route::screen(sprintf('%s/{id?}', $this->mainRouteItem), $this->detailScreen)
+        Route::screen(sprintf('%s/{id?}', $this->mainRouteItem), $this->editScreen)
             ->name(sprintf('platform.%s.edit', $this->mainRoute))
             ->breadcrumbs(function (Trail $trail, ?int $id = null) : Trail
             {

@@ -19,7 +19,7 @@ class AttributeListTable extends Table
                 {
                     return Link::make($attribute->name)->route('platform.attributes.edit', $attribute);
                 }),
-            TD::make('game', 'Game')
+            TD::make('game', 'Games')
                 ->render(function (Attribute $attribute) : Link
                 {
                     return Link::make($attribute->game->name)

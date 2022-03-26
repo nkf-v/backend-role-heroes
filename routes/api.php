@@ -1,27 +1,27 @@
 <?php
 
-use App\Http\Controllers\Api\AuthApiController;
+use App\Modules\Users\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ErrorApiController;
-use App\Http\Controllers\Api\GameApiController;
 use App\Http\Controllers\Api\HeroApiController;
 use App\Http\Controllers\Api\HeroAttributeApiController;
 use App\Http\Controllers\Api\HeroCharacteristicApiController;
 use App\Http\Controllers\Api\HeroStructuralAttributeApiController;
 use App\Http\Controllers\Api\StructuralAttributeApiController;
+use App\Modules\Games\Controllers\Api\GameController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function ()
 {
-    Route::get('check', [AuthApiController::class, 'check'])->name('login');
-    Route::post('login', [AuthApiController::class, 'login']);
-    Route::post('register', [AuthApiController::class, 'register']);
+    Route::get('check', [AuthController::class, 'check'])->name('login');
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
 });
 
 Route::middleware('auth:api')->group(function ()
 {
     Route::prefix('games')->group(function ()
     {
-        Route::get('/', [GameApiController::class, 'getList']);
+        Route::get('/', [GameController::class, 'getList']);
         Route::get('{game_id}/heroes', [HeroApiController::class, 'getByGame']);
     });
 
@@ -39,8 +39,8 @@ Route::middleware('auth:api')->group(function ()
 
     Route::get('structural_attributes/{attribute_id}/values', [StructuralAttributeApiController::class, 'getValues']);
 
-    Route::get('logout', [AuthApiController::class, 'logout']);
-    Route::get('auth/refresh', [AuthApiController::class, 'refresh']);
+    Route::get('logout', [AuthController::class, 'logout']);
+    Route::get('auth/refresh', [AuthController::class, 'refresh']);
 });
 
 Route::fallback([ErrorApiController::class, 'error']);

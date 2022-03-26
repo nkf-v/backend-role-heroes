@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Admin\AdminBase;
 use App\Modules\Categories\Admin\CategoryAdmin;
 use App\Modules\Games\Admin\GameAdmin;
+use App\Modules\Users\Admin\UserAdmin;
 use Illuminate\Support\Facades\Route;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,6 +15,7 @@ class AdminProvider extends ServiceProvider
     protected array $crudClasses = [
         GameAdmin::class,
         CategoryAdmin::class,
+        UserAdmin::class,
     ];
 
     public function map() : void

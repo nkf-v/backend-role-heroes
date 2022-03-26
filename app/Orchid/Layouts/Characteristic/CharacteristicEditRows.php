@@ -30,7 +30,7 @@ class CharacteristicEditRows extends Rows
                 ->disabled()
                 ->canSee(!$this->isCreate),
             Relation::make('characteristic.game_id')
-                ->title('Game')
+                ->title('Games')
                 ->placeholder('Select game')
                 ->required()
                 ->fromModel(Game::class, 'name', 'id'),

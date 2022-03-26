@@ -26,7 +26,16 @@ class HeroApiController extends ApiController
 
     public function get(int $heroId, FullHeroApiFormatter $formatter) : JsonResponse
     {
-        $hero = $this->userProvider->getUser()->heroes()->find($heroId);
+        $hero = $this->userProvider
+            ->getUser()
+            ->heroes()
+            ->with([
+                'characteristicValues',
+                'attributeValues',
+                'structuralAttributeValues',
+                'items',
+            ])
+            ->find($heroId);
         if ($hero === null)
             throw new ServerError(['hero_id' => ['invalid_value']]);
 

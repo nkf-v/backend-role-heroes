@@ -32,7 +32,7 @@ class StructuralAttributeEditRows extends Rows
                 ->disabled()
                 ->canSee(!$this->isCreated),
             Relation::make('attribute.game_id')
-                ->title('Game')
+                ->title('Games')
                 ->placeholder('Select game')
                 ->required()
                 ->fromModel(Game::class, 'name', 'id'),

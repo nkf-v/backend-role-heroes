@@ -19,7 +19,7 @@ class HeroListLayout extends Table
                 {
                     return Link::make($hero->name)->route('platform.heroes.detail', $hero);
                 }),
-            TD::make('game', 'Game')
+            TD::make('game', 'Games')
                 ->render(function (Hero $hero) : Link
                 {
                     return Link::make($hero->game->name)

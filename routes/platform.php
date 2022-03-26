@@ -1,22 +1,16 @@
 <?php declare(strict_types=1);
 
-use App\Models\Category;
 use App\Models\Characteristic;
-use App\Models\Game;
 use App\Models\StructuralAttribute;
 use App\Models\StructuralAttributeValue;
 use App\Models\User;
 use App\Orchid\Screens\Attribute\AttributeEditScreen;
 use App\Orchid\Screens\Attribute\AttributeListScreen;
-use App\Orchid\Screens\Category\CategoryEditScreen;
-use App\Orchid\Screens\Category\CategoryListScreen;
 use App\Orchid\Screens\Characteristic\CharacteristicEditScreen;
 use App\Orchid\Screens\Characteristic\CharacteristicListScreen;
 use App\Orchid\Screens\Employee\EmployeeEditScreen;
 use App\Orchid\Screens\Employee\EmployeeListScreen;
 use App\Orchid\Screens\Employee\EmployeeProfileScreen;
-use App\Orchid\Screens\Game\GameEditScreen;
-use App\Orchid\Screens\Game\GameListScreen;
 use App\Orchid\Screens\Hero\HeroDetailScreen;
 use App\Orchid\Screens\Hero\HeroListScreen;
 use App\Orchid\Screens\PlatformScreen;
@@ -27,12 +21,8 @@ use App\Orchid\Screens\StructuralAttribute\StructuralAttributeListScreen;
 use App\Orchid\Screens\StructuralAttributeValue\StructuralAttributeValueEditScreen;
 use App\Orchid\Screens\StructuralAttributeValue\StructuralAttributeValueListScreen;
 use App\Orchid\Screens\StructureField\StructureFieldEditScreen;
-use App\Orchid\Screens\User\UserDetailScreen;
-use App\Orchid\Screens\User\UserListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-
-// TODO: Реализовать алгоритм для генерации бащовый роутов (list, edit)
 
 /*
 |--------------------------------------------------------------------------
@@ -104,76 +94,7 @@ Route::screen('roles', RoleListScreen::class)
             ->push(__('Roles'), route('platform.systems.roles'));
     });
 
-Route::screen('users', UserListScreen::class)
-    ->name('platform.users.list')
-    ->breadcrumbs(function (Trail $trail) : Trail
-    {
-        return $trail->push(__('Users'));
-    });
-
-Route::screen('user/{user}', UserDetailScreen::class)
-    ->name('platform.users.detail')
-    ->breadcrumbs(function (Trail $trail, int $userId) : Trail
-    {
-        $user = User::find($userId);
-        $name = 'User';
-        if ($user !== null)
-            $name = $user->login;
-
-        return $trail
-            ->push(__('Users'), route('platform.users'))
-            ->push($name);
-    });
-
-Route::screen('games', GameListScreen::class)
-    ->name('platform.games.list')
-    ->breadcrumbs(function (Trail $trail) : Trail
-    {
-        return $trail
-            ->push(__('Games'));
-    });
-
-Route::screen('game/{game?}', GameEditScreen::class)
-    ->name('platform.games.edit')
-    ->breadcrumbs(function (Trail $trail, ?int $gameId = null) : Trail
-    {
-        $name = 'Game';
-        if ($gameId !== null)
-        {
-            $game = Game::find($gameId);
-            if ($game !== null)
-                $name = $game->name;
-        }
-
-        return $trail
-            ->push(__('Games'), route('platform.games.list'))
-            ->push($name);
-    });
-
-Route::screen('categories', CategoryListScreen::class)
-    ->name('platform.categories.list')
-    ->breadcrumbs(function (Trail $trail) : Trail
-    {
-        return $trail
-            ->push(__('Categories'));
-    });
-
-Route::screen('category/{category?}', CategoryEditScreen::class)
-    ->name('platform.categories.edit')
-    ->breadcrumbs(function (Trail $trail, ?int $categoryId = null) : Trail
-    {
-        $name = 'Category';
-        if ($categoryId !== null)
-        {
-            $game = Category::find($categoryId);
-            if ($game !== null)
-                $name = $game->name;
-        }
-
-        return $trail
-            ->push(__('Categories'), route('platform.categories.list'))
-            ->push($name);
-    });
+// Custom routes
 
 Route::screen('characteristics', CharacteristicListScreen::class)
     ->name('platform.characteristics.list')
@@ -241,7 +162,6 @@ Route::screen('structural_attribute/{attribute?}', StructuralAttributeEditScreen
             ->push(__($attributeName));
     });
 
-// TODO add attribute id
 Route::screen('structure_field/{field}', StructureFieldEditScreen::class)
     ->name('platform.structure_fields.edit')
     ->breadcrumbs(function (Trail $trail) : Trail

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Modules\Games\Models\Game;
+use App\Modules\Users\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -42,5 +44,5 @@ class Hero extends Model
 
     public function attributeValues() : HasMany { return $this->hasMany(AttributeValue::class, 'hero_id')->with('attribute'); }
     public function structuralAttributeValues() : BelongsToMany { return $this->belongsToMany(StructuralAttributeValue::class, 'hero_structural_attribute_values', 'hero_id', 'attribute_value_id')->with('attribute', 'fieldsValues')->withTimestamps(); }
-    public function items() : BelongsToMany { return $this->belongsToMany(Item::class, 'heroes_items')->withTimestamps(); }
+    public function items() : BelongsToMany { return $this->belongsToMany(Item::class, 'heroes_items')->withTimestamps()->with('fieldValues'); }
 }

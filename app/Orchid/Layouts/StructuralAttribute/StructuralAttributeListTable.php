@@ -20,7 +20,7 @@ class StructuralAttributeListTable extends Table
                     return Link::make($attribute->name)
                         ->route('platform.structural_attributes.edit', $attribute->id);
                 }),
-            TD::make('game', 'Game')
+            TD::make('game', 'Games')
                 ->render(function (StructuralAttribute $attribute) : Link
                 {
                     return Link::make($attribute->game->name)

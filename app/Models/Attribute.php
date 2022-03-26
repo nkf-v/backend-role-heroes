@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\AttributeTypeEnum;
+use App\Modules\Categories\Models\Category;
+use App\Modules\Games\Models\Game;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Screen\AsSource;

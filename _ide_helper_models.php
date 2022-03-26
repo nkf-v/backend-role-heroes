@@ -22,8 +22,8 @@ namespace App\Models{
  * @property int|null $category_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Category|null $category
- * @property-read \App\Models\Game $game
+ * @property-read \App\Modules\Categories\Models\Category|null $category
+ * @property-read \App\Modules\Games\Models\Game $game
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute query()
@@ -68,27 +68,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\Category
- *
- * @property int $id
- * @property string $name
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attribute[] $attributes
- * @property-read int|null $attributes_count
- * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Category query()
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
- */
-	class Category extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\Characteristic
  *
  * @property int $id
@@ -97,7 +76,7 @@ namespace App\Models{
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Game $game
+ * @property-read \App\Modules\Games\Models\Game $game
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Characteristic query()
@@ -154,37 +133,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\Game
- *
- * @property int $id
- * @property string $name
- * @property string $description
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attribute[] $attributeModels
- * @property-read int|null $attribute_models_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristics
- * @property-read int|null $characteristics_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Hero[] $heroes
- * @property-read int|null $heroes_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Item[] $items
- * @property-read int|null $items_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttribute[] $structuralAttributes
- * @property-read int|null $structural_attributes_count
- * @method static \Illuminate\Database\Eloquent\Builder|Game newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Game newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Game query()
- * @method static \Illuminate\Database\Eloquent\Builder|Game whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Game whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Game whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Game whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Game whereUpdatedAt($value)
- */
-	class Game extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\Hero
  *
  * @property int $id
@@ -198,12 +146,12 @@ namespace App\Models{
  * @property-read int|null $attribute_values_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristicValues
  * @property-read int|null $characteristic_values_count
- * @property-read \App\Models\Game $game
+ * @property-read \App\Modules\Games\Models\Game $game
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Item[] $items
  * @property-read int|null $items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttributeValue[] $structuralAttributeValues
  * @property-read int|null $structural_attribute_values_count
- * @property-read \App\Models\User $user
+ * @property-read \App\Modules\Users\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Hero newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Hero newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Hero query()
@@ -232,8 +180,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemFieldValue[] $fieldValues
  * @property-read int|null $field_values_count
- * @property-read \App\Models\Game $game
- * @property-read \App\Models\User|null $user
+ * @property-read \App\Modules\Games\Models\Game $game
+ * @property-read \App\Modules\Users\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Item newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Item newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Item query()
@@ -260,7 +208,7 @@ namespace App\Models{
  * @property int $value_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Game $game
+ * @property-read \App\Modules\Games\Models\Game $game
  * @method static \Illuminate\Database\Eloquent\Builder|ItemField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ItemField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ItemField query()
@@ -318,10 +266,10 @@ namespace App\Models{
  * @property int|null $category_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Category|null $category
+ * @property-read \App\Modules\Categories\Models\Category|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructureField[] $fields
  * @property-read int|null $fields_count
- * @property-read \App\Models\Game $game
+ * @property-read \App\Modules\Games\Models\Game $game
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttributeValue[] $values
  * @property-read int|null $values_count
  * @method static \Illuminate\Database\Eloquent\Builder|StructuralAttribute newModelQuery()
@@ -420,9 +368,63 @@ namespace App\Models{
 	class StructureField extends \Eloquent {}
 }
 
-namespace App\Models{
+namespace App\Modules\Categories\Models{
 /**
- * App\Models\User
+ * App\Modules\Categories\Models\Category
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $game_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereGameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
+ */
+	class Category extends \Eloquent {}
+}
+
+namespace App\Modules\Games\Models{
+/**
+ * App\Modules\Games\Models\Game
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attribute[] $attributeModels
+ * @property-read int|null $attribute_models_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\Categories\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Characteristic[] $characteristics
+ * @property-read int|null $characteristics_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Hero[] $heroes
+ * @property-read int|null $heroes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Item[] $items
+ * @property-read int|null $items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StructuralAttribute[] $structuralAttributes
+ * @property-read int|null $structural_attributes_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Game newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Game newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Game query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Game whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Game whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Game whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Game whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Game whereUpdatedAt($value)
+ */
+	class Game extends \Eloquent {}
+}
+
+namespace App\Modules\Users\Models{
+/**
+ * App\Modules\Users\Models\User
  *
  * @property int $id
  * @property string $login

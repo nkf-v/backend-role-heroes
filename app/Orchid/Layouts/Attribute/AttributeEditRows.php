@@ -33,7 +33,7 @@ class AttributeEditRows extends Rows
                 ->canSee(!$this->isCreated)
                 ->disabled(),
             Relation::make('attribute.game_id')
-                ->title('Game')
+                ->title('Games')
                 ->placeholder('Select game')
                 ->required()
                 ->fromModel(Game::class, 'name', 'id'),
