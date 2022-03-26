@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\AttributeTypeEnum;
+use App\Enums\ValueTypeEnum;
 use App\Enums\ItemTypeEnum;
 use App\Models\Attribute;
 use App\Models\Characteristic;
@@ -12,9 +12,10 @@ use App\Modules\Games\Models\Game;
 use App\Models\Hero;
 use App\Models\Item;
 use App\Models\ItemField;
-use App\Models\StructuralAttribute;
-use App\Models\StructuralAttributeValue;
-use App\Models\StructureField;
+use App\Modules\StructuralAttributes\Models\StructuralAttribute;
+use App\Modules\StructuralAttributes\Models\StructuralAttributeValue;
+use App\Modules\StructuralAttributes\Models\StructureField;
+use App\Modules\StructuralAttributes\Models\StructuralAttributeValueGroup;
 use App\Modules\Users\Models\User;
 use Faker\Generator;
 use Nkf\General\Utils\ArrayUtils;
@@ -95,7 +96,7 @@ class FixtureSeeder
                 else if ($this->faker->boolean)
                     $attribute->description = $this->faker->text;
                 $attribute->game_id = $attributeDatum['game_id'] ?? $this->faker->randomElement($games);
-                $attribute->type_value = AttributeTypeEnum::getVariables()[$attributeDatum['type_value'] ?? 'string'];
+                $attribute->type_value = ValueTypeEnum::getVariables()[$attributeDatum['type_value'] ?? 'string'];
                 $attribute->category_id = $category->id;
                 $attribute->save();
                 $attributes[] = $attribute;
@@ -110,6 +111,15 @@ class FixtureSeeder
                 $attribute->game_id = $attributeDatum['game_id'];
                 $attribute->category_id = $category->id;
                 $attribute->save();
+
+                $groupData = [];
+                foreach ($attributeDatum['groups'] ?? [] as $groupDatum)
+                {
+                    $group = new StructuralAttributeValueGroup();
+                    $group->name = $groupDatum['name'];
+                    $group->attribute_id = $attribute->id;
+                    $group->save();
+                }
 
                 $fieldData = [];
                 foreach ($attributeDatum['fields'] ?? [] as $structureColumn)
@@ -128,6 +138,7 @@ class FixtureSeeder
                     $attributeValue->name = $attributeValueDatum['name'];
                     $attributeValue->description = $this->faker->boolean ? null : $this->faker->sentence;
                     $attributeValue->attribute_id = $attribute->id;
+                    $attributeValue->group_id = $attributeValueDatum['group_id'] ?? null;
                     $attributeValue->save();
 
                     $fieldValues = $attributeValueDatum['field_values'] ?? [];
@@ -205,13 +216,13 @@ class FixtureSeeder
                     foreach ($hero->game->attributeModels as $attribute)
                     {
                         $value = $this->faker->sentence(random_int(1, 2));
-                        if ($attribute->type_value === AttributeTypeEnum::INT)
+                        if ($attribute->type_value === ValueTypeEnum::INT)
                             $value = random_int(0, 100);
-                        else if ($attribute->type_value === AttributeTypeEnum::BOOL)
+                        else if ($attribute->type_value === ValueTypeEnum::BOOL)
                             $value = $this->faker->boolean;
-                        else if ($attribute->type_value === AttributeTypeEnum::DOUBLE)
+                        else if ($attribute->type_value === ValueTypeEnum::DOUBLE)
                             $value = $this->faker->randomFloat(2, 0, 100);
-                        $columnValue = sprintf('value_%s', AttributeTypeEnum::getValues()[$attribute->type_value] ?? 'string');
+                        $columnValue = sprintf('value_%s', ValueTypeEnum::getValues()[$attribute->type_value] ?? 'string');
                         $hero->attributeValues()
                             ->where('attribute_id', $attribute->id)
                             ->update([$columnValue => $value]);

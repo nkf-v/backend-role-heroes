@@ -2,13 +2,14 @@
 
 namespace App\Formatters\Api;
 
-use App\Enums\AttributeTypeEnum;
+use App\Enums\ValueTypeEnum;
 use App\Models\AttributeValue;
+use App\Modules\Categories\Formatters\Api\CategoryFormatter;
 use Nkf\General\Classes\BaseFormatter;
 
 class HeroAttributeValueApiFormatter extends BaseFormatter
 {
-    public function __construct(CategoryApiFormatter $categoryFormatter)
+    public function __construct(CategoryFormatter $categoryFormatter)
     {
         $this->setFormatter(function (AttributeValue $attributeValue) use ($categoryFormatter) : array
         {
@@ -16,7 +17,7 @@ class HeroAttributeValueApiFormatter extends BaseFormatter
                 'id' => $attributeValue->attribute->id,
                 'name' => $attributeValue->attribute->name,
                 'description' => $attributeValue->attribute->description,
-                'type' => AttributeTypeEnum::getValues()[$attributeValue->attribute->type_value],
+                'type' => ValueTypeEnum::getValues()[$attributeValue->attribute->type_value],
                 'value' => $attributeValue->value,
                 'category' => $categoryFormatter->format($attributeValue->attribute->category),
             ];

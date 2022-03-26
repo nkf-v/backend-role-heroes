@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\AttributeTypeEnum;
+use App\Enums\ValueTypeEnum;
 use App\Traits\HasValue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

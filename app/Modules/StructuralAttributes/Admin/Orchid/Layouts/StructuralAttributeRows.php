@@ -1,18 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace App\Orchid\Layouts\Attribute;
+namespace App\Modules\StructuralAttributes\Admin\Orchid\Layouts;
 
-use App\Enums\ValueTypeEnum;
-use App\Models\Category;
-use App\Models\Game;
+use App\Modules\Categories\Models\Category;
+use App\Modules\Games\Models\Game;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\Switcher;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layouts\Rows;
 
-class AttributeEditRows extends Rows
+class StructuralAttributeRows extends Rows
 {
     protected $isCreated = false;
 
@@ -21,17 +20,17 @@ class AttributeEditRows extends Rows
         $this->isCreated = $isCreated;
     }
 
-    protected function fields() : array
+    protected function fields(): array
     {
         return [
             DateTimer::make('attribute.created_at')
                 ->title('Created')
-                ->canSee(!$this->isCreated)
-                ->disabled(),
+                ->disabled()
+                ->canSee(!$this->isCreated),
             DateTimer::make('attribute.updated_at')
                 ->title('Updated')
-                ->canSee(!$this->isCreated)
-                ->disabled(),
+                ->disabled()
+                ->canSee(!$this->isCreated),
             Relation::make('attribute.game_id')
                 ->title('Games')
                 ->placeholder('Select game')
@@ -41,14 +40,14 @@ class AttributeEditRows extends Rows
                 ->title('Category')
                 ->placeholder('Select category')
                 ->fromModel(Category::class, 'name', 'id'),
-            Select::make('attribute.type_value')
-                ->title('Type value')
-                ->required()
-                ->options(ValueTypeEnum::getLabels()),
             Input::make('attribute.name')
                 ->title('Name')
                 ->required()
                 ->placeholder('Enter name attribute'),
+            Switcher::make('attribute.multiply')
+                ->title('Multiply')
+                ->disabled(!$this->isCreated)
+                ->value(false),
             TextArea::make('attribute.description')
                 ->title('Description')
                 ->rows(5)

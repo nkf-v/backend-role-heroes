@@ -1,14 +1,14 @@
 <?php
 
-use App\Enums\AttributeTypeEnum;
+use App\Enums\ValueTypeEnum;
 use App\Enums\ItemTypeEnum;
 
 return [
-    AttributeTypeEnum::class => [
-        AttributeTypeEnum::INT => 'Integer',
-        AttributeTypeEnum::STRING => 'String',
-        AttributeTypeEnum::BOOL => 'Boolean',
-        AttributeTypeEnum::DOUBLE => 'Double',
+    ValueTypeEnum::class => [
+        ValueTypeEnum::INT => 'Integer',
+        ValueTypeEnum::STRING => 'String',
+        ValueTypeEnum::BOOL => 'Boolean',
+        ValueTypeEnum::DOUBLE => 'Double',
     ],
     ItemTypeEnum::class => [
         ItemTypeEnum::ITEM => 'Item',

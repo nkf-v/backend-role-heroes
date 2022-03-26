@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Hero;
 
-use App\Enums\AttributeTypeEnum;
+use App\Enums\ValueTypeEnum;
 use App\Models\AttributeValue;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;

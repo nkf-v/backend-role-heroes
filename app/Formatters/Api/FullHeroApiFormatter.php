@@ -3,9 +3,8 @@
 namespace App\Formatters\Api;
 
 use App\Models\Hero;
-use App\Models\StructuralAttributeValue;
+use App\Modules\StructuralAttributes\Formatters\Api\StructuralAttributeFormatter;
 use Nkf\General\Classes\BaseFormatter;
-use Nkf\General\Utils\ArrayUtils;
 
 class FullHeroApiFormatter extends BaseFormatter
 {

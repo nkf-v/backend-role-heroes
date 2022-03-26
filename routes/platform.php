@@ -1,9 +1,13 @@
 <?php declare(strict_types=1);
 
 use App\Models\Characteristic;
-use App\Models\StructuralAttribute;
-use App\Models\StructuralAttributeValue;
-use App\Models\User;
+use App\Modules\StructuralAttributes\Admin\Orchid\Screens\StructuralAttributeEdit;
+use App\Modules\StructuralAttributes\Admin\Orchid\Screens\StructuralAttributeList;
+use App\Modules\StructuralAttributes\Admin\Orchid\Screens\StructuralAttributeValueEdit;
+use App\Modules\StructuralAttributes\Admin\Orchid\Screens\StructuralAttributeValueList;
+use App\Modules\StructuralAttributes\Admin\Orchid\Screens\StructureFieldEdit;
+use App\Modules\StructuralAttributes\Models\StructuralAttribute;
+use App\Modules\StructuralAttributes\Models\StructuralAttributeValue;
 use App\Orchid\Screens\Attribute\AttributeEditScreen;
 use App\Orchid\Screens\Attribute\AttributeListScreen;
 use App\Orchid\Screens\Characteristic\CharacteristicEditScreen;
@@ -16,11 +20,6 @@ use App\Orchid\Screens\Hero\HeroListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
-use App\Orchid\Screens\StructuralAttribute\StructuralAttributeEditScreen;
-use App\Orchid\Screens\StructuralAttribute\StructuralAttributeListScreen;
-use App\Orchid\Screens\StructuralAttributeValue\StructuralAttributeValueEditScreen;
-use App\Orchid\Screens\StructuralAttributeValue\StructuralAttributeValueListScreen;
-use App\Orchid\Screens\StructureField\StructureFieldEditScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -138,7 +137,7 @@ Route::screen('attribute/{attribute?}', AttributeEditScreen::class)
             ->push(__('Attribute'));
     });
 
-Route::screen('structural_attributes', StructuralAttributeListScreen::class)
+Route::screen('structural_attributes', StructuralAttributeList::class)
     ->name('platform.structural_attributes.list')
     ->breadcrumbs(function (Trail $trail) : Trail
     {
@@ -146,7 +145,7 @@ Route::screen('structural_attributes', StructuralAttributeListScreen::class)
             ->push(__('Structural attributes'), route('platform.structural_attributes.list'));
     });
 
-Route::screen('structural_attribute/{attribute?}', StructuralAttributeEditScreen::class)
+Route::screen('structural_attribute/{attribute?}', StructuralAttributeEdit::class)
     ->name('platform.structural_attributes.edit')
     ->breadcrumbs(function (Trail $trail, ?int $attributeId = null) : Trail
     {
@@ -162,14 +161,14 @@ Route::screen('structural_attribute/{attribute?}', StructuralAttributeEditScreen
             ->push(__($attributeName));
     });
 
-Route::screen('structure_field/{field}', StructureFieldEditScreen::class)
+Route::screen('structure_field/{field}', StructureFieldEdit::class)
     ->name('platform.structure_fields.edit')
     ->breadcrumbs(function (Trail $trail) : Trail
     {
         return $trail->push(__('Structure field'));
     });
 
-Route::screen('structural_attribute/{attribute}/values', StructuralAttributeValueListScreen::class)
+Route::screen('structural_attribute/{attribute}/values', StructuralAttributeValueList::class)
     ->name('platform.structural_attribute_values.list')
     ->breadcrumbs(function (Trail $trail, int $attributeId) : Trail
     {
@@ -181,7 +180,7 @@ Route::screen('structural_attribute/{attribute}/values', StructuralAttributeValu
             ->push(__('Values'));
     });
 
-Route::screen('structural_attribute/{attribute}/value/{value?}', StructuralAttributeValueEditScreen::class)
+Route::screen('structural_attribute/{attribute}/value/{value?}', StructuralAttributeValueEdit::class)
     ->name('platform.structural_attribute_values.edit')
     ->breadcrumbs(function (Trail $trail, int $attributeId, ?int $valueId = null) : Trail
     {

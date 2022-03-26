@@ -2,32 +2,39 @@
 
 namespace App\Traits;
 
-use App\Enums\AttributeTypeEnum;
+use App\Enums\ValueTypeEnum;
 
-/**
- * Таблица модели должна иметь поля:
- * value_int
- * value_string
- * value_bool
- * value_double
- */
 trait HasValue
 {
+    protected string $valuePrefix = 'value_';
+
     public abstract function getType() : int;
 
-    public function getFiledValue() : string { return sprintf('value_%s', AttributeTypeEnum::getValues()[$this->getType()]); }
+    public function getFiledValue() : string
+    {
+        return sprintf('%s%s', $this->valuePrefix, ValueTypeEnum::getValues()[$this->getType()]);
+    }
 
-    public function getValueAttribute() { return $this->getAttribute($this->getFiledValue()); }
-    public function setValueAttribute($value) : void { $this->setAttribute($this->getFiledValue(), $value); }
+    /** @return int|string|bool|double */
+    public function getValueAttribute()
+    {
+        return $this->getAttribute($this->getFiledValue());
+    }
 
+    public function setValueAttribute($value) : void
+    {
+        $this->setAttribute($this->getFiledValue(), $value);
+    }
+
+    /** @return int|string|bool|double|null */
     public function castValue($value)
     {
         $result = null;
         switch($this->getType()) {
-            case AttributeTypeEnum::INT: $result = (int)$value; break;
-            case AttributeTypeEnum::STRING: $result = (string)$value; break;
-            case AttributeTypeEnum::BOOL: $result = (bool)$value; break;
-            case AttributeTypeEnum::DOUBLE: $result = (double)$value; break;
+            case ValueTypeEnum::INT: $result = (int)$value; break;
+            case ValueTypeEnum::STRING: $result = (string)$value; break;
+            case ValueTypeEnum::BOOL: $result = (bool)$value; break;
+            case ValueTypeEnum::DOUBLE: $result = (double)$value; break;
         }
 
         return $result;

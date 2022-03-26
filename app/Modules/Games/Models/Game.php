@@ -6,7 +6,7 @@ use App\Models\Attribute;
 use App\Models\Characteristic;
 use App\Models\Hero;
 use App\Models\Item;
-use App\Models\StructuralAttribute;
+use App\Modules\StructuralAttributes\Models\StructuralAttribute;
 use App\Modules\Categories\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;

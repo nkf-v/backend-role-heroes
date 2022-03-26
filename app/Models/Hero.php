@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Modules\Games\Models\Game;
 use App\Modules\Users\Models\User;
+use App\Modules\StructuralAttributes\Models\StructuralAttributeValue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

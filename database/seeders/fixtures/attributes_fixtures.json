@@ -102,12 +102,15 @@
                 "multiply": true,
                 "name": "Traits",
                 "game_id": 1,
-                "fields": [
+                "groups": [
                     {
-                        "type": 0,
-                        "name": "Price",
-                        "slug": "price"
+                        "name": "Basic weapon"
                     },
+                    {
+                        "name": "Heavy weapons"
+                    }
+                ],
+                "fields": [
                     {
                         "type": 1,
                         "name": "Type",
@@ -118,36 +121,45 @@
                     {
                         "name": "Dodge",
                         "field_values": {
-                            "price": 100,
                             "type": "Talent"
                         }
                     },
                     {
                         "name": "Machine control",
                         "field_values": {
-                            "price": 150,
                             "type": "Skill"
                         }
                     },
                     {
                         "name": "Strong physique",
                         "field_values": {
-                            "price": 100,
                             "type": "Talent"
                         }
                     },
                     {
                         "name": "Insight",
                         "field_values": {
-                            "price": 100,
                             "type": "Skill"
                         }
                     },
                     {
                         "name": "Search",
                         "field_values": {
-                            "price": 100,
                             "type": "Skill"
+                        }
+                    },
+                    {
+                        "name": "Fire",
+                        "group_id": 2,
+                        "field_values": {
+                            "type": "Talent"
+                        }
+                    },
+                    {
+                        "name": "Plasma",
+                        "group_id": 2,
+                        "field_values": {
+                            "type": "Talent"
                         }
                     }
                 ]

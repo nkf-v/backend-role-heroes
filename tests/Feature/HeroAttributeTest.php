@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Enums\AttributeTypeEnum;
+use App\Enums\ValueTypeEnum;
 use App\Models\Attribute;
 use App\Models\Game;
 use App\Models\Hero;
@@ -24,9 +24,9 @@ class HeroAttributeTest extends ApiTestCase
         $value = null;
         switch ($attribute->type_value)
         {
-            case AttributeTypeEnum::INT: $value = random_int(0, 100); break;
-            case AttributeTypeEnum::DOUBLE: $value = 10.12; break;
-            case AttributeTypeEnum::BOOL: $value = (boolean)random_int(0, 1); break;
+            case ValueTypeEnum::INT: $value = random_int(0, 100); break;
+            case ValueTypeEnum::DOUBLE: $value = 10.12; break;
+            case ValueTypeEnum::BOOL: $value = (boolean)random_int(0, 1); break;
         }
 
         $this->login($user)
