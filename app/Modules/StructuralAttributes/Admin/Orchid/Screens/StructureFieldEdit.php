@@ -3,7 +3,7 @@
 namespace App\Modules\StructuralAttributes\Admin\Orchid\Screens;
 
 use App\Modules\StructuralAttributes\Admin\Orchid\Layouts\StructureFieldEditRows;
-use App\Modules\StructuralAttributes\Models\StructureField;
+use App\Modules\StructuralAttributes\Models\Field;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class StructureFieldEdit extends Screen
     protected int $attributeId;
     protected string $attributeName;
 
-    protected function query(StructureField $field) : array
+    protected function query(Field $field) : array
     {
         $this->name = $field->name;
         $this->attributeId = $field->attribute_id;
@@ -54,7 +54,7 @@ class StructureFieldEdit extends Screen
         ];
     }
 
-    protected function update(StructureField $field, Request $request) : RedirectResponse
+    protected function update(Field $field, Request $request) : RedirectResponse
     {
         $fieldData = $request->get('field');
         $field->name = $fieldData['name'];
@@ -71,7 +71,7 @@ class StructureFieldEdit extends Screen
         return redirect(route('platform.structure_fields.edit', $field->id));
     }
 
-    protected function delete(StructureField  $field) : RedirectResponse
+    protected function delete(Field $field) : RedirectResponse
     {
         $field->delete();
 

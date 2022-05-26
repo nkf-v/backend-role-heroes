@@ -3,7 +3,7 @@
 namespace App\Modules\StructuralAttributes\Admin\Orchid\Layouts;
 
 use App\Enums\ValueTypeEnum;
-use App\Modules\StructuralAttributes\Models\StructuralFieldValue;
+use App\Modules\StructuralAttributes\Models\FieldValue;
 use Illuminate\Database\Eloquent\Collection;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Switcher;
@@ -12,10 +12,10 @@ use Orchid\Screen\Layouts\Rows;
 class StructuralFieldValuesRows extends Rows
 {
     protected bool $isCreate;
-    /** @var StructuralFieldValue[] */
+    /** @var FieldValue[] */
     protected ?Collection $fieldValues;
 
-    /** @param StructuralFieldValue[] $fieldValues */
+    /** @param FieldValue[] $fieldValues */
     public function __construct(bool $isCreate, ?Collection $fieldValues)
     {
         $this->isCreate = $isCreate;

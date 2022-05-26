@@ -112,8 +112,12 @@
                 ],
                 "fields": [
                     {
-                        "type": 1,
+                        "type": 4,
                         "name": "Type",
+                        "options": [
+                            "Skill",
+                            "Talent"
+                        ],
                         "slug": "type"
                     }
                 ],
@@ -121,45 +125,45 @@
                     {
                         "name": "Dodge",
                         "field_values": {
-                            "type": "Talent"
+                            "type": 1
                         }
                     },
                     {
                         "name": "Machine control",
                         "field_values": {
-                            "type": "Skill"
+                            "type": 0
                         }
                     },
                     {
                         "name": "Strong physique",
                         "field_values": {
-                            "type": "Talent"
+                            "type": 1
                         }
                     },
                     {
                         "name": "Insight",
                         "field_values": {
-                            "type": "Skill"
+                            "type": 0
                         }
                     },
                     {
                         "name": "Search",
                         "field_values": {
-                            "type": "Skill"
+                            "type": 0
                         }
                     },
                     {
                         "name": "Fire",
-                        "group_id": 2,
+                        "group_id": 0,
                         "field_values": {
-                            "type": "Talent"
+                            "type": 1
                         }
                     },
                     {
                         "name": "Plasma",
-                        "group_id": 2,
+                        "group_id": 0,
                         "field_values": {
-                            "type": "Talent"
+                            "type": 1
                         }
                     }
                 ]

@@ -4,13 +4,20 @@ namespace App\Modules\StructuralAttributes\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Screen\AsSource;
 
-class StructureField extends Model
+/**
+ * @property int $attribute_id
+ * @property string $name
+ * @property int $type
+ */
+class Field extends Model
 {
     use AsSource;
 
     public $timestamps = true;
+    protected $table = 'structure_fields';
 
     protected static function boot()
     {
@@ -22,7 +29,7 @@ class StructureField extends Model
                 ->get()
                 ->each(function (StructuralAttributeValue $value) use ($field) : void
                 {
-                    $fieldValue = new StructuralFieldValue();
+                    $fieldValue = new FieldValue();
                     $fieldValue->attribute_value_id = $value->id;
                     $fieldValue->attribute_field_id = $field->id;
                     $fieldValue->save();
@@ -30,5 +37,13 @@ class StructureField extends Model
         });
     }
 
-    public function attribute() : BelongsTo { return $this->belongsTo(StructuralAttribute::class, 'attribute_id'); }
+    public function attribute() : BelongsTo
+    {
+        return $this->belongsTo(StructuralAttribute::class, 'attribute_id');
+    }
+
+    public function selectOptions(): HasMany
+    {
+        return $this->hasMany(FieldSelectOption::class, 'field_id');
+    }
 }

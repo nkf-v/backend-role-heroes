@@ -10,4 +10,5 @@ class ValueTypeEnum extends LaravelEnum
     public const STRING = 1;
     public const BOOL = 2;
     public const DOUBLE = 3;
+    public const SELECT = 4;
 }

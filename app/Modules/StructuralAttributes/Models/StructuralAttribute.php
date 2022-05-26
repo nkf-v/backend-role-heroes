@@ -27,7 +27,7 @@ class StructuralAttribute extends Model
 
     public function fields() : HasMany
     {
-        return $this->hasMany(StructureField::class, 'attribute_id');
+        return $this->hasMany(Field::class, 'attribute_id');
     }
 
     public function values() : HasMany

@@ -2,20 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Enums\ValueTypeEnum;
 use App\Enums\ItemTypeEnum;
+use App\Enums\ValueTypeEnum;
 use App\Models\Attribute;
 use App\Models\Characteristic;
-use App\Models\Employee;
-use App\Modules\Categories\Models\Category;
-use App\Modules\Games\Models\Game;
 use App\Models\Hero;
 use App\Models\Item;
 use App\Models\ItemField;
+use App\Modules\Categories\Models\Category;
+use App\Modules\Games\Models\Game;
+use App\Modules\StructuralAttributes\Models\FieldSelectOption;
+use App\Modules\StructuralAttributes\Models\FieldValue;
 use App\Modules\StructuralAttributes\Models\StructuralAttribute;
 use App\Modules\StructuralAttributes\Models\StructuralAttributeValue;
-use App\Modules\StructuralAttributes\Models\StructureField;
 use App\Modules\StructuralAttributes\Models\StructuralAttributeValueGroup;
+use App\Modules\StructuralAttributes\Models\Field;
 use App\Modules\Users\Models\User;
 use Faker\Generator;
 use Nkf\General\Utils\ArrayUtils;
@@ -33,22 +34,6 @@ class FixtureSeeder
 
     public function run() : void
     {
-        for ($i = random_int(1, 3); $i --> 0;)
-        {
-            $employee = new Employee();
-            $employee->name = sprintf('admin%s', $i + 1);
-            $employee->email = sprintf('admin%s@email.com', $i + 1);
-            $employee->password = bcrypt('qweqwe');
-            $employee->permissions = [
-                'platform.index' => true,
-                'platform.systems.index' => true,
-                'platform.systems.roles' => true,
-                'platform.systems.employees' => true,
-                'platform.systems.attachment' => true,
-            ];
-            $employee->save();
-        }
-
         $userIds = [];
         for ($i = random_int(5, 8); $i --> 1;)
         {
@@ -64,7 +49,7 @@ class FixtureSeeder
         foreach ($gameData as $gameDatum)
         {
             $game = new Game();
-            $game->name = $gameDatum['name'] ?? $this->faker->sentence(2);
+            $game->name = $gameDatum['name'];
             $game->description = $gameDatum['description'] ?? $this->faker->text;
             $game->save();
             $games[] = $game;
@@ -99,7 +84,6 @@ class FixtureSeeder
                 $attribute->type_value = ValueTypeEnum::getVariables()[$attributeDatum['type_value'] ?? 'string'];
                 $attribute->category_id = $category->id;
                 $attribute->save();
-                $attributes[] = $attribute;
             }
 
             foreach ($categoryDatum['structure_attributes'] ?? [] as $attributeDatum)
@@ -113,22 +97,33 @@ class FixtureSeeder
                 $attribute->save();
 
                 $groupData = [];
-                foreach ($attributeDatum['groups'] ?? [] as $groupDatum)
+                foreach ($attributeDatum['groups'] ?? [] as $key => $groupDatum)
                 {
                     $group = new StructuralAttributeValueGroup();
                     $group->name = $groupDatum['name'];
                     $group->attribute_id = $attribute->id;
                     $group->save();
+                    $groupData[$key] = $group->id;
                 }
 
                 $fieldData = [];
+                $fieldOptions = [];
                 foreach ($attributeDatum['fields'] ?? [] as $structureColumn)
                 {
-                    $field = new StructureField();
+                    $field = new Field();
                     $field->attribute_id = $attribute->id;
                     $field->name = $structureColumn['name'];
                     $field->type = $structureColumn['type'];
                     $field->save();
+
+                    foreach ($structureColumn['options'] ?? [] as $key => $optionLabel)
+                    {
+                        $option = new FieldSelectOption();
+                        $option->field_id = $field->id;
+                        $option->label = $optionLabel;
+                        $option->save();
+                        $fieldOptions[$field->id][$key] = $option;
+                    }
                     $fieldData[$structureColumn['slug']] = $field;
                 }
 
@@ -138,15 +133,24 @@ class FixtureSeeder
                     $attributeValue->name = $attributeValueDatum['name'];
                     $attributeValue->description = $this->faker->boolean ? null : $this->faker->sentence;
                     $attributeValue->attribute_id = $attribute->id;
-                    $attributeValue->group_id = $attributeValueDatum['group_id'] ?? null;
+                    $keyGroup = $attributeValueDatum['group_id'] ?? null;
+                    if ($keyGroup !== null)
+                        $attributeValue->group_id = $groupData[$keyGroup];
                     $attributeValue->save();
 
                     $fieldValues = $attributeValueDatum['field_values'] ?? [];
-                    $valuesFields = $attributeValue->fieldsValues->keyBy('attribute_field_id');
+                    $valuesFields = $attributeValue->fieldsValues
+                        ->keyBy('attribute_field_id');
                     foreach ($fieldValues as $slugField => $fieldValue)
                     {
-                        $valueField = $valuesFields[$fieldData[$slugField]->id];
-                        $valueField->value = $valueField->castValue($fieldValue);
+                        /** @var Field $field */
+                        $field = $fieldData[$slugField];
+                        /** @var FieldValue $valueField */
+                        $valueField = $valuesFields[$field->id];
+                        if ($field->type === ValueTypeEnum::SELECT)
+                            $valueField->value = $fieldOptions[$field->id][$fieldValue]->id;
+                        else
+                            $valueField->value = $valueField->castValue($fieldValue);
                         $valueField->save();
                     }
                 }

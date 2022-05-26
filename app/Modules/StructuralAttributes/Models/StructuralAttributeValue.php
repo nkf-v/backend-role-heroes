@@ -19,11 +19,11 @@ class StructuralAttributeValue extends Model
 
         self::created(function (self $value) : void
         {
-            StructureField::where('attribute_id', $value->attribute_id)
+            Field::where('attribute_id', $value->attribute_id)
                 ->get()
-                ->each(function (StructureField $field) use ($value) : void
+                ->each(function (Field $field) use ($value) : void
                 {
-                    $fieldValue = new StructuralFieldValue();
+                    $fieldValue = new FieldValue();
                     $fieldValue->attribute_value_id = $value->id;
                     $fieldValue->attribute_field_id = $field->id;
                     $fieldValue->save();
@@ -44,6 +44,6 @@ class StructuralAttributeValue extends Model
 
     public function fieldsValues() : HasMany
     {
-        return $this->HasMany(StructuralFieldValue::class, 'attribute_value_id')->with('field');
+        return $this->HasMany(FieldValue::class, 'attribute_value_id')->with('field');
     }
 }

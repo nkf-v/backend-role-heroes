@@ -3,7 +3,7 @@
 namespace App\Modules\StructuralAttributes\Admin\Orchid\Layouts;
 
 use App\Enums\ValueTypeEnum;
-use App\Modules\StructuralAttributes\Models\StructureField;
+use App\Modules\StructuralAttributes\Models\Field;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -23,13 +23,13 @@ class StructureFieldTable extends Table
         return [
             TD::make('name', 'Name')
                 ->canSee($this->attributeIsCreated)
-                ->render(function (StructureField $field) : Link
+                ->render(function (Field $field) : Link
                 {
                     return Link::make($field->name)->route('platform.structure_fields.edit', $field->id);
                 }),
             TD::make('type', 'Type')
                 ->canSee($this->attributeIsCreated)
-                ->render(function (StructureField $field) : string
+                ->render(function (Field $field) : string
                 {
                     return ValueTypeEnum::getLabels()[$field->type];
                 }),

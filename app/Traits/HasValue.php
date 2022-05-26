@@ -15,8 +15,7 @@ trait HasValue
         return sprintf('%s%s', $this->valuePrefix, ValueTypeEnum::getValues()[$this->getType()]);
     }
 
-    /** @return int|string|bool|double */
-    public function getValueAttribute()
+    public function getValueAttribute(): int|string|bool|float
     {
         return $this->getAttribute($this->getFiledValue());
     }
@@ -26,17 +25,14 @@ trait HasValue
         $this->setAttribute($this->getFiledValue(), $value);
     }
 
-    /** @return int|string|bool|double|null */
-    public function castValue($value)
+    public function castValue($value): float|bool|int|string|null
     {
-        $result = null;
-        switch($this->getType()) {
-            case ValueTypeEnum::INT: $result = (int)$value; break;
-            case ValueTypeEnum::STRING: $result = (string)$value; break;
-            case ValueTypeEnum::BOOL: $result = (bool)$value; break;
-            case ValueTypeEnum::DOUBLE: $result = (double)$value; break;
-        }
-
-        return $result;
+        return match ($this->getType()) {
+            ValueTypeEnum::INT, ValueTypeEnum::SELECT => (int)$value,
+            ValueTypeEnum::STRING => (string)$value,
+            ValueTypeEnum::BOOL => (bool)$value,
+            ValueTypeEnum::DOUBLE => (double)$value,
+            default => null,
+        };
     }
 }

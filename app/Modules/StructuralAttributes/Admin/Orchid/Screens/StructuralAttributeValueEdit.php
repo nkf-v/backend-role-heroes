@@ -6,7 +6,7 @@ use App\Modules\StructuralAttributes\Admin\Orchid\Layouts\StructuralAttributeVal
 use App\Modules\StructuralAttributes\Admin\Orchid\Layouts\StructuralFieldValuesRows;
 use App\Modules\StructuralAttributes\Models\StructuralAttribute;
 use App\Modules\StructuralAttributes\Models\StructuralAttributeValue;
-use App\Modules\StructuralAttributes\Models\StructuralFieldValue;
+use App\Modules\StructuralAttributes\Models\FieldValue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class StructuralAttributeValueEdit extends Screen
 
     protected bool $exists = false;
     protected StructuralAttribute $attribute;
-    /** @var StructuralFieldValue[] */
+    /** @var FieldValue[] */
     protected ?Collection $fieldValues;
 
     protected function query(StructuralAttribute $attribute, StructuralAttributeValue $value) : array
@@ -95,7 +95,7 @@ class StructuralAttributeValueEdit extends Screen
              * @var string $fieldValue */
             foreach ($fieldValues as $fieldId => $fieldValue)
             {
-                /** @var StructuralFieldValue|null $field */
+                /** @var FieldValue|null $field */
                 $field = $valueFields[$fieldId] ?? null;
                 if ($field !== null)
                 {
