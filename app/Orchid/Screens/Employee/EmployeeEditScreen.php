@@ -2,11 +2,11 @@
 
 namespace App\Orchid\Screens\Employee;
 
-use App\Models\Employee;
+use App\Modules\Employees\Models\Employee;
 use App\Orchid\Access\EmployeeSwitch;
-use App\Orchid\Layouts\Role\RolePermissionLayout;
 use App\Orchid\Layouts\Employee\EmployeeEditLayout;
 use App\Orchid\Layouts\Employee\EmployeeRoleLayout;
+use App\Orchid\Layouts\Role\RolePermissionLayout;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;

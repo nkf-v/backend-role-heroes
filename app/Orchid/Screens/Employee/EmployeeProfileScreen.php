@@ -2,9 +2,9 @@
 
 namespace App\Orchid\Screens\Employee;
 
-use App\Models\Employee;
-use App\Orchid\Layouts\Employee\PasswordLayout;
+use App\Modules\Employees\Models\Employee;
 use App\Orchid\Layouts\Employee\EmployeeEditLayout;
+use App\Orchid\Layouts\Employee\PasswordLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;

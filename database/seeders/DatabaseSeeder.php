@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         if (!App::isProduction())
         {
             $this->clearTables();
+            app(EmployeeFixture::class)->run();
             app(FixtureSeeder::class)->run();
         }
     }

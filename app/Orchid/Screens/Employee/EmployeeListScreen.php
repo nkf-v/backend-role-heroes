@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens\Employee;
 
-use App\Models\Employee;
+use App\Modules\Employees\Models\Employee;
 use App\Orchid\Layouts\Employee\EmployeeEditLayout;
 use App\Orchid\Layouts\Employee\EmployeeFiltersLayout;
 use App\Orchid\Layouts\Employee\EmployeeListLayout;

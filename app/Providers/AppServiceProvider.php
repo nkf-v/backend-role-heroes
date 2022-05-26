@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Employee;
+use App\Modules\Employees\Models\Employee;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Platform\Dashboard;
