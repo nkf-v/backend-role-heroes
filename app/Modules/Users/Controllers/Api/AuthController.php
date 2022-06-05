@@ -12,6 +12,52 @@ use Nkf\Laravel\Classes\Exceptions\ServerError;
 
 class AuthController extends ApiController
 {
+    /**
+     * @OA\Post (
+     *     tags = {"Auth"},
+     *     path = "/auth/register",
+     *     summary = "Register user",
+     *     operationId = "authRegistry",
+     *     @OA\RequestBody (
+     *         @OA\MediaType (
+     *             mediaType = "multipart/form-data",
+     *             @OA\Schema (
+     *                 @OA\Property (
+     *                     property = "login",
+     *                     type = "string",
+     *                     example = "new_user"
+     *                 ),
+     *                 @OA\Property (
+     *                     property = "password",
+     *                     type = "string",
+     *                     example = "qweqwe"
+     *                 ),
+     *                 @OA\Property (
+     *                     property = "password_confirmation",
+     *                     type = "string",
+     *                     example = "qweqwe"
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response (
+     *         response = "200",
+     *         description = "Success register",
+     *         @OA\JsonContent (
+     *             @OA\Schema (
+     *                 title = "Access tokens",
+     *                 type = "object",
+     *                 @OA\Property (
+     *                     title = "Access token",
+     *                     property = "access_token",
+     *                     format = "string",
+     *                     type = "string"
+     *                 ),
+     *             ),
+     *         ),
+     *     )
+     * )
+     */
     public function register(UserRequest $request) : JsonResponse
     {
         $newUser = $request->validated();
@@ -26,6 +72,18 @@ class AuthController extends ApiController
         return $this->responseWithToken(Auth::guard('api')->login($user));
     }
 
+    /**
+     * @OA\Post (
+     *     tags = {"Auth"},
+     *     path = "/auth/login",
+     *     summary = "Login user",
+     *     operationId = "authLogin",
+     *     @OA\Response (
+     *         response = "200",
+     *         description = "Success login"
+     *     )
+     * )
+     */
     public function login(LoginRequest $request) : JsonResponse
     {
         $credentials = $request->validated();

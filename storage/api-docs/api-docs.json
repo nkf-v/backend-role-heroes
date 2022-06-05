@@ -1,0 +1,114 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "RoleHeroes API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http:\\\\localhost:2609/api/",
+            "description": "local server"
+        },
+        {
+            "url": "https://test-role-heroes.herokuapp.com/api/",
+            "description": "Test server"
+        }
+    ],
+    "paths": {
+        "/games": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Get all games",
+                "operationId": "getGames",
+                "responses": {
+                    "200": {
+                        "description": "All games"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "Bearer JWT"
+                    }
+                ]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register user",
+                "operationId": "authRegistry",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "login": {
+                                        "type": "string",
+                                        "example": "new_user"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "qweqwe"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "qweqwe"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success register",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user",
+                "operationId": "authLogin",
+                "responses": {
+                    "200": {
+                        "description": "Success login"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "description": "Auth by JWT",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Games",
+            "description": "Methods for work with games"
+        },
+        {
+            "name": "Auth",
+            "description": "Methods auth for clients"
+        }
+    ]
+}
