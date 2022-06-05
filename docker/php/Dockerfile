@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.0-fpm
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
@@ -13,4 +13,5 @@ RUN chown -R www-data:www-data /var/www
 
 WORKDIR /var/www
 
-CMD ./tmp/deploy.sh
+ENTRYPOINT bash -c /tmp/deploy.sh
+CMD []
