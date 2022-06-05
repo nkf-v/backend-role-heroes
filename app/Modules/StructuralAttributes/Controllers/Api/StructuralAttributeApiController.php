@@ -2,8 +2,8 @@
 
 namespace App\Modules\StructuralAttributes\Controllers\Api;
 
-use App\Formatters\Api\StructuralAttributeValueFormatter;
 use App\Http\Controllers\Api\ApiController;
+use App\Modules\StructuralAttributes\Formatters\Api\StructuralAttributeValueFormatter;
 use App\Modules\StructuralAttributes\Models\StructuralAttribute;
 use Illuminate\Http\JsonResponse;
 use Nkf\Laravel\Classes\Exceptions\ServerError;

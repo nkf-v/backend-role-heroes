@@ -1,13 +1,13 @@
 <?php
 
-use App\Modules\Users\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ErrorApiController;
 use App\Http\Controllers\Api\HeroApiController;
 use App\Http\Controllers\Api\HeroAttributeApiController;
 use App\Http\Controllers\Api\HeroCharacteristicApiController;
 use App\Http\Controllers\Api\HeroStructuralAttributeApiController;
-use App\Http\Controllers\Api\StructuralAttributeApiController;
 use App\Modules\Games\Controllers\Api\GameController;
+use App\Modules\StructuralAttributes\Controllers\Api\StructuralAttributeApiController;
+use App\Modules\Users\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function ()
