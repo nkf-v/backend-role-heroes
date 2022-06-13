@@ -3,6 +3,7 @@
 namespace App\Modules\Users\Controllers\Api;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Modules\Users\Docs\OpenApi\IAuthController;
 use App\Modules\Users\Models\User;
 use App\Modules\Users\Requests\LoginRequest;
 use App\Modules\Users\Requests\UserRequest;
@@ -10,54 +11,8 @@ use Auth;
 use Illuminate\Http\JsonResponse;
 use Nkf\Laravel\Classes\Exceptions\ServerError;
 
-class AuthController extends ApiController
+class AuthController extends ApiController implements IAuthController
 {
-    /**
-     * @OA\Post (
-     *     tags = {"Auth"},
-     *     path = "/auth/register",
-     *     summary = "Register user",
-     *     operationId = "authRegistry",
-     *     @OA\RequestBody (
-     *         @OA\MediaType (
-     *             mediaType = "multipart/form-data",
-     *             @OA\Schema (
-     *                 @OA\Property (
-     *                     property = "login",
-     *                     type = "string",
-     *                     example = "new_user"
-     *                 ),
-     *                 @OA\Property (
-     *                     property = "password",
-     *                     type = "string",
-     *                     example = "qweqwe"
-     *                 ),
-     *                 @OA\Property (
-     *                     property = "password_confirmation",
-     *                     type = "string",
-     *                     example = "qweqwe"
-     *                 ),
-     *             ),
-     *         ),
-     *     ),
-     *     @OA\Response (
-     *         response = "200",
-     *         description = "Success register",
-     *         @OA\JsonContent (
-     *             @OA\Schema (
-     *                 title = "Access tokens",
-     *                 type = "object",
-     *                 @OA\Property (
-     *                     title = "Access token",
-     *                     property = "access_token",
-     *                     format = "string",
-     *                     type = "string"
-     *                 ),
-     *             ),
-     *         ),
-     *     )
-     * )
-     */
     public function register(UserRequest $request) : JsonResponse
     {
         $newUser = $request->validated();
@@ -72,18 +27,6 @@ class AuthController extends ApiController
         return $this->responseWithToken(Auth::guard('api')->login($user));
     }
 
-    /**
-     * @OA\Post (
-     *     tags = {"Auth"},
-     *     path = "/auth/login",
-     *     summary = "Login user",
-     *     operationId = "authLogin",
-     *     @OA\Response (
-     *         response = "200",
-     *         description = "Success login"
-     *     )
-     * )
-     */
     public function login(LoginRequest $request) : JsonResponse
     {
         $credentials = $request->validated();

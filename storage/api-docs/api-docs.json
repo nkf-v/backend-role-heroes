@@ -43,23 +43,24 @@
                 "operationId": "authRegistry",
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
-                                "properties": {
-                                    "login": {
-                                        "type": "string",
-                                        "example": "new_user"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "qweqwe"
-                                    },
-                                    "password_confirmation": {
-                                        "type": "string",
-                                        "example": "qweqwe"
+                                "type": "object",
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/RegisterUser"
                                     }
-                                },
-                                "type": "object"
+                                ]
+                            },
+                            "examples": {
+                                "New User": {
+                                    "summary": "Simple new user",
+                                    "value": {
+                                        "login": "new_user",
+                                        "password": "qweqwe",
+                                        "password_confirmation": "qweqwe"
+                                    }
+                                }
                             }
                         }
                     }
@@ -69,7 +70,24 @@
                         "description": "Success register",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "type": "object",
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/AccessToken"
+                                        }
+                                    ]
+                                },
+                                "examples": {
+                                    "result": {
+                                        "summary": "Succes response by register",
+                                        "value": {
+                                            "access_token": "example_token",
+                                            "token_type": "brear",
+                                            "expires_in": 604800
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -92,6 +110,47 @@
         }
     },
     "components": {
+        "schemas": {
+            "AccessToken": {
+                "title": "Access token info",
+                "properties": {
+                    "access_token": {
+                        "title": "Access token",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "token_type": {
+                        "title": "Token type",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "expires_in": {
+                        "title": "Expire time",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterUser": {
+                "title": "New user",
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "example": "user_user"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "qweqwe"
+                    },
+                    "password_confirmation": {
+                        "type": "string",
+                        "example": "qweqwe"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "bearer": {
                 "type": "http",
