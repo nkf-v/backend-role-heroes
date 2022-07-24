@@ -16,7 +16,7 @@ use Nkf\Laravel\Classes\ApiController as BaseApiController;
  * )
  * @OA\Tag (
  *     name = "Auth",
- *     description = "Methods auth for clients"
+ *     description = "Methods auth for client"
  * )
  * @OA\Server (
  *     url = "http:\\localhost:2609/api/",
